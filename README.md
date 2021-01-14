@@ -2,16 +2,33 @@
 
 Modern ECMAScript loader.
 
-## Metadata
+## Why
 
-Example:
+I need [ES modules] and I don't give a fuck about [Greasemonkey API].
+
+[ES modules]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
+[Greasemonkey API]: https://wiki.greasespot.net/Greasemonkey_Manual:API
+
+## Example
+
 ```js
-// @name Hack
-// @match https://www.google.com/*
+// @name Hollowing
 // @match https://github.com/*
+// @match https://www.reddit.com/r/*
+import { addStyleSheet } from 'https://unpkg.com/userstyle@0.1.1/dist/es2018/index.min.mjs'
 
-console.log('hacked!')
+addStyleSheet(`
+  *:before {
+    content: 'OHHH'
+  }
+
+  *:after {
+    content: 'ELDEN RING'
+  }
+`)
 ```
+
+## Metadata
 
 ### @name
 

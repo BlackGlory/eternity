@@ -3,7 +3,7 @@
 , "name": "Elden"
 , "author": "BlackGlory"
 , "version": "0.1.0"
-, "description": ""
+, "description": "Modern ECMAScript loader."
 , "background": {
     "scripts": ["browser-polyfill.min.js", "background.js"]
   , "persistent": false

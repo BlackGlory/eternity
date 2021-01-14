@@ -3,8 +3,9 @@ import { IIFE } from '@blackglory/code-tags'
 import { isMatch } from 'micromatch'
 
 browser.webNavigation.onCommitted.addListener(async details => {
-  const matchedScripts = await DAO.filterEnabledUserScripts(x => matchAnyOfUrlPatterns(details.url, x.urlPatterns))
-  console.log(matchedScripts)
+  const matchedScripts = await DAO.filterEnabledUserScripts(script => {
+    return matchAnyOfUrlPatterns(details.url, script.urlPatterns)
+  })
 
   if (matchedScripts.length > 0) {
     injectContentScript(
@@ -39,5 +40,6 @@ function matchAnyOfUrlPatterns(url: string, patterns: string[]): boolean {
 }
 
 function matchUrlPattern(url: string, pattern: string): boolean {
-  return isMatch(url, pattern)
+  console.log(url, pattern)
+  return isMatch(url, pattern, { bash: true })
 }
