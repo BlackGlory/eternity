@@ -73,6 +73,7 @@ export const Options: React.FC = () => {
     } else {
       await DAO.updateUserScript(script.id, newCode)
     }
+    setEditingScript(undefined)
     await loadUserScripts()
   }
 

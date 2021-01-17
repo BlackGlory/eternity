@@ -32,7 +32,19 @@ function createESMContentScript(...scripts: string[]): string {
 }
 
 async function injectContentScript(tabId: number, frameId: number, script: string): Promise<void> {
-  await browser.tabs.executeScript(tabId, { frameId, code: script, runAt: 'document_start' })
+  await browser.tabs.executeScript(
+    tabId
+  , {
+      frameId
+      // Bypass restrictions of Chrome extension scripts
+    , code: IIFE`
+        const script = document.createElement('script')
+        script.text = ${script}
+        document.head.append(script)
+      `
+    , runAt: 'document_start'
+    }
+  )
 }
 
 function matchAnyOfUrlPatterns(url: string, patterns: string[]): boolean {
@@ -40,6 +52,5 @@ function matchAnyOfUrlPatterns(url: string, patterns: string[]): boolean {
 }
 
 function matchUrlPattern(url: string, pattern: string): boolean {
-  console.log(url, pattern)
   return isMatch(url, pattern, { bash: true })
 }
