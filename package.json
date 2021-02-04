@@ -65,8 +65,8 @@
     "monaco-editor": "^0.21.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-is": "^17.0.1",
     "react-monaco-editor": "^0.41.2",
-    "react-redux": "^7.2.2",
     "styled-components": "^5.2.1",
     "webextension-polyfill": "^0.7.0"
   }
