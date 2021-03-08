@@ -1,3 +1,5 @@
+import { go } from '@blackglory/go'
+
 export interface Metadata {
   name: string
   urlPatterns: string[]
@@ -13,10 +15,10 @@ export function parseMetadata(code: string): Metadata {
         name = parseNameValue(value)
         break
       case 'match':
-        ;(() => {
+        go(() => {
           const urlPattern = parseMatchValue(value)
           if (urlPattern) urlPatterns.push(urlPattern)
-        })()
+        })
         break
     }
   }
