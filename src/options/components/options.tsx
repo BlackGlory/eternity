@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useState, useLayoutEffect } from 'react'
 import { Editor } from './editor'
 import * as DAO from '@shared/dao'

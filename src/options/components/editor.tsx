@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useRef } from 'react'
 import MonacoEditor, { monaco } from 'react-monaco-editor'
 

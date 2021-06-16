@@ -4,6 +4,7 @@
   , "module": "CommonJS"
   , "strict": true
   , "jsx": "react-jsx"
+  , "esModuleInterop": true
   , "noUnusedLocals": true
   , "noUnusedParameters": false
   , "baseUrl": "."
