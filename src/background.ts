@@ -38,9 +38,12 @@ async function injectContentScript(tabId: number, frameId: number, script: strin
       frameId
       // Bypass restrictions of Chrome extension scripts
     , code: IIFE`
-        const script = document.createElement('script')
-        script.text = ${script}
-        document.head.append(script)
+        // wait for document.head
+        setTimeout(() => {
+          const script = document.createElement('script')
+          script.text = ${script}
+          document.head.append(script)
+        }, 0)
       `
     , runAt: 'document_start'
     }
