@@ -16,6 +16,23 @@ browser.webNavigation.onCommitted.addListener(async details => {
   }
 })
 
+// Drop CSP headers for loading ESM content scirpts
+// Other solutions: https://github.com/BlackGlory/Elden/issues/1
+browser.webRequest.onHeadersReceived.addListener(
+  details => {
+    const responseHeaders = details.responseHeaders!.filter(x => {
+      return x.name.toLowerCase() !== 'content-security-policy'
+    })
+
+    return { responseHeaders }
+  }
+, {
+    urls: ['<all_urls>']
+  , types: ['main_frame', 'sub_frame']
+  }
+, ['blocking', 'responseHeaders']
+)
+
 function createESMContentScript(...scripts: string[]): string {
   const loaders = scripts.map(script => IIFE`loadESMScript(${script})`).join('\n')
 

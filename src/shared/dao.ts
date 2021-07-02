@@ -68,12 +68,11 @@ export async function listAllUserScripts(): Promise<IUserScript[]> {
 
 export async function filterEnabledUserScripts(predicate: (script: IUserScript) => boolean): Promise<IUserScript[]> {
   const records = await db.userScripts
-                          .where('enabled')
-                          .equals(Boolean.True)
-                          .filter((script: IUserScriptObject) => {
-                            return predicate(convertUserScriptObjectToUserScript(script))
-                          })
-                          .toArray()
+    .where('enabled')
+    .equals(Boolean.True)
+    .filter((script: IUserScriptObject) => predicate(convertUserScriptObjectToUserScript(script)))
+    .toArray()
+
   return records.map(convertUserScriptObjectToUserScript)
 }
 
