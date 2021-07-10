@@ -1,4 +1,4 @@
-import * as DAO from '@shared/dao'
+import * as DAO from '@utils/dao'
 import { IIFE } from '@blackglory/code-tags'
 import { isMatch } from 'micromatch'
 

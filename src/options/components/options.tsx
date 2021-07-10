@@ -1,6 +1,6 @@
 import { useState, useLayoutEffect } from 'react'
 import { Editor } from './editor'
-import * as DAO from '@shared/dao'
+import * as DAO from '@utils/dao'
 
 interface IEditingScript {
   id?: DAO.IUserScript['id']

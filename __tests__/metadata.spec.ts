@@ -1,5 +1,5 @@
 import { stripIndent } from 'common-tags'
-import { parseMetadata, parseMetadataLines } from '@shared/metadata'
+import { parseMetadata, parseMetadataLines } from '@utils/metadata'
 import { toArray } from 'iterable-operator'
 import '@blackglory/jest-matchers'
 
