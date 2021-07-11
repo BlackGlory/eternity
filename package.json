@@ -59,7 +59,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@blackglory/code-tags": "^0.2.0",
+    "@blackglory/code-tags": "^0.3.0",
     "@blackglory/go": "^0.1.0",
     "dexie": "^3.0.3",
     "micromatch": "^4.0.4",

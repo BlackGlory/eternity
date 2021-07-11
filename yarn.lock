@@ -495,13 +495,13 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@blackglory/code-tags@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@blackglory/code-tags/-/code-tags-0.2.0.tgz#8077ac11b745d0ee84f546388c8f427e642975f8"
-  integrity sha512-a7cGwnub7kmxcrGPNuHlXqbOAJDOfOC25ckWX7iZcQUVoVMS6WiJWfQx6W7YwlArTtoZ8cQTaCefWc3l7qgrUA==
+"@blackglory/code-tags@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@blackglory/code-tags/-/code-tags-0.3.0.tgz#e735904d2813577d865f7b943ec57c2db18b1445"
+  integrity sha512-lzJEmCTSMwbNuO2Gv29GLnOldU5s7uNUiOaIqemcmO/TtGo5sj5iGFLlG9CQbXAgCSg+f7IyyxBNndyet9viEQ==
   dependencies:
     "@blackglory/types" "^0.4.7"
-    extra-tags "^0.1.0"
+    extra-tags "^0.1.1"
 
 "@blackglory/errors@^1.1.2":
   version "1.1.2"
@@ -2695,10 +2695,10 @@ extra-stream@^0.1.2:
   dependencies:
     "@blackglory/types" "^0.4.6"
 
-extra-tags@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/extra-tags/-/extra-tags-0.1.0.tgz#0f99d912500cde698ba9b1716a2b0318d5f131cc"
-  integrity sha512-8I8LjFmQUlpYUTt5w9GSrnTPwi6ditBMP4vXfK7A6WP/7Jr308Ir5geTig5GMCDfex8haHdVEyosTAOWToPX4g==
+extra-tags@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/extra-tags/-/extra-tags-0.1.1.tgz#d17b4352bc9da336efa8b841bdadc484f22cfc01"
+  integrity sha512-G07P+G1EzuoLhxljdUJli65ROCoCSDBulpNmYHD0rbxqhYPVp0rO7CCu+L8GUlHs+ZeX5cgHHTC0OEl2y2qdsw==
   dependencies:
     justypes "^0.1.5"
 
