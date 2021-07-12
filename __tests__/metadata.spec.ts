@@ -1,11 +1,11 @@
-import { stripIndent } from 'common-tags'
+import { dedent } from 'extra-tags'
 import { parseMetadata, parseMetadataLines } from '@utils/metadata'
 import { toArray } from 'iterable-operator'
 import '@blackglory/jest-matchers'
 
 describe('parseMetadata(code: string): Metadata', () => {
   it('return Metadata', () => {
-    const codes = stripIndent`
+    const codes = dedent`
     // @name blackglory.me
     // @match *://www.blackglory.me/*
     `
@@ -21,10 +21,10 @@ describe('parseMetadata(code: string): Metadata', () => {
 
 describe('parseMetadataLines(code: string): Iterable<{ key: stirng, value: string }>', () => {
   it('return Iterable', () => {
-    const codes = stripIndent`
-    // @key1 value1
+    const codes = dedent`
+      // @key1 value1
 
-    // @key2 value2
+      // @key2 value2
     `
 
     const result = parseMetadataLines(codes)

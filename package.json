@@ -23,7 +23,6 @@
     "@blackglory/jest-matchers": "^0.1.19",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "@types/common-tags": "^1.8.1",
     "@types/firefox-webext-browser": "^82.0.1",
     "@types/jest": "^26.0.24",
     "@types/micromatch": "^4.0.2",
@@ -34,10 +33,10 @@
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
-    "common-tags": "^1.8.0",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^5.2.6",
     "eslint": "^7.30.0",
+    "extra-tags": "^0.2.2",
     "file-loader": "^6.2.0",
     "husky": "^4.3.7",
     "iterable-operator": "^0.14.1",
@@ -59,7 +58,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@blackglory/code-tags": "^0.3.0",
+    "@blackglory/code-tags": "^0.3.2",
     "@blackglory/go": "^0.1.0",
     "dexie": "^3.0.3",
     "micromatch": "^4.0.4",

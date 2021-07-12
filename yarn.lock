@@ -495,13 +495,13 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@blackglory/code-tags@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@blackglory/code-tags/-/code-tags-0.3.0.tgz#e735904d2813577d865f7b943ec57c2db18b1445"
-  integrity sha512-lzJEmCTSMwbNuO2Gv29GLnOldU5s7uNUiOaIqemcmO/TtGo5sj5iGFLlG9CQbXAgCSg+f7IyyxBNndyet9viEQ==
+"@blackglory/code-tags@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@blackglory/code-tags/-/code-tags-0.3.2.tgz#a3105b29d67290c1aba2266bdc8a89c007743020"
+  integrity sha512-kIspczfkEQYJemNJfYq7osjpwIgGmb+Wvv3EZJJ3Jfk6tb4onbKTTySoOAveXSN18hkR4rYJV3Xx1pj3VubloA==
   dependencies:
     "@blackglory/types" "^0.4.7"
-    extra-tags "^0.1.1"
+    extra-tags "^0.2.2"
 
 "@blackglory/errors@^1.1.2":
   version "1.1.2"
@@ -1026,11 +1026,6 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/braces/-/braces-3.0.0.tgz#7da1c0d44ff1c7eb660a36ec078ea61ba7eb42cb"
   integrity sha512-TbH79tcyi9FHwbyboOKeRachRq63mSuWYXOflsNO9ZyE5ClQ/JaozNKl+aWUq87qPNsXasXxi2AbgfwIJ+8GQw==
-
-"@types/common-tags@^1.8.1":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@types/common-tags/-/common-tags-1.8.1.tgz#a5a49ca5ebbb58e0f8947f3ec98950c8970a68a9"
-  integrity sha512-20R/mDpKSPWdJs5TOpz3e7zqbeCNuMCPhV7Yndk9KU2Rbij2r5W4RzwDPkzC+2lzUqXYu9rFzTktCBnDjHuNQg==
 
 "@types/eslint-scope@^3.7.0":
   version "3.7.0"
@@ -1968,11 +1963,6 @@ commander@^7.0.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-7.0.0.tgz#3e2bbfd8bb6724760980988fb5b22b7ee6b71ab2"
   integrity sha512-ovx/7NkTrnPuIV8sqk/GjUIIM1+iUQeqA3ye2VNpq9sVoiZsooObWlQy+OPWGI17GDaEoybuAGJm6U8yC077BA==
 
-common-tags@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.8.0.tgz#8e3153e542d4a39e9b10554434afaaf98956a937"
-  integrity sha512-6P6g0uetGpW/sdyUy/iQQCbFF0kWVMSIVSyYz7Zgjcgh8mgw8PQzDNZeyZ5DQ2gM7LBoZPHmnjz8rUthkBG5tw==
-
 compare-func@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/compare-func/-/compare-func-2.0.0.tgz#fb65e75edbddfd2e568554e8b5b05fff7a51fcb3"
@@ -2695,10 +2685,10 @@ extra-stream@^0.1.2:
   dependencies:
     "@blackglory/types" "^0.4.6"
 
-extra-tags@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/extra-tags/-/extra-tags-0.1.1.tgz#d17b4352bc9da336efa8b841bdadc484f22cfc01"
-  integrity sha512-G07P+G1EzuoLhxljdUJli65ROCoCSDBulpNmYHD0rbxqhYPVp0rO7CCu+L8GUlHs+ZeX5cgHHTC0OEl2y2qdsw==
+extra-tags@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/extra-tags/-/extra-tags-0.2.2.tgz#bbb6f546520a6e31ee5389ffdec27fa0de10a55b"
+  integrity sha512-aWsBrb9hH/vqvbvlR+w9FfJTowDT3+2m/1mzlKasSmLhHbUdEShsSpl9rILneeG0FemfgNohZkyfEtc/02y9eg==
   dependencies:
     justypes "^0.1.5"
 
