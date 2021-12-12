@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import { Editor } from './editor'
 import * as DAO from '@utils/dao'
 

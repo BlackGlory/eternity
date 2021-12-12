@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import MonacoEditor, { monaco } from 'react-monaco-editor'
 
 export interface EditorProps {
