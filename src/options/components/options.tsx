@@ -8,7 +8,7 @@ interface IEditingScript {
   code: DAO.IUserScript['code']
 }
 
-export const Options: React.FC = () => {
+export function Options() {
   const [list, setList] = useState<DAO.IUserScript[]>([])
   const [editingScript, setEditingScript] = useState<IEditingScript>()
 

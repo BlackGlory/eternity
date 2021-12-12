@@ -1,14 +1,14 @@
 import React, { useRef } from 'react'
 import MonacoEditor, { monaco } from 'react-monaco-editor'
 
-export interface EditorProps {
+export interface IEditorProps {
   name: string
   code: string
   onSave: (code: string) => void
   onCancel: () => void
 }
 
-export const Editor: React.FC<EditorProps> = props => {
+export function Editor(props: IEditorProps) {
   const editor = useRef<monaco.editor.IStandaloneCodeEditor>()
 
   return (
