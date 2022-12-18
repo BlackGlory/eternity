@@ -1,7 +1,6 @@
 import { dedent } from 'extra-tags'
 import { parseMetadata, parseMetadataLines } from '@utils/metadata'
 import { toArray } from 'iterable-operator'
-import '@blackglory/jest-matchers'
 
 describe('parseMetadata(code: string): Metadata', () => {
   it('return Metadata', () => {
@@ -27,11 +26,10 @@ describe('parseMetadataLines(code: string): Iterable<{ key: stirng, value: strin
       // @key2 value2
     `
 
-    const result = parseMetadataLines(codes)
-    const arrResult = toArray(result)
+    const iter = parseMetadataLines(codes)
+    const result = toArray(iter)
 
-    expect(result).toBeIterable()
-    expect(arrResult).toEqual([
+    expect(result).toEqual([
       { key: 'key1', value: 'value1' }
     , { key: 'key2', value: 'value2' }
     ])

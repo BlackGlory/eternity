@@ -20,7 +20,6 @@
     }
   },
   "devDependencies": {
-    "@blackglory/jest-matchers": "^0.1.21",
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
     "@types/firefox-webext-browser": "^94.0.0",
