@@ -41,5 +41,4 @@ only the basic `*` wildcard is recommended.
 
 ## CDN
 - [jsDelivr](https://www.jsdelivr.com/)
-- [Skypack](https://www.skypack.dev/)
 - [esm.sh](https://esm.sh/)
