@@ -1,16 +1,13 @@
 # Elden
-
 Modern ECMAScript loader.
 
 ## Why
-
-I need [ES modules] and I don't give a fuck about [Greasemonkey API].
+I need [ES modules] and I don't care about [Greasemonkey API].
 
 [ES modules]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
 [Greasemonkey API]: https://wiki.greasespot.net/Greasemonkey_Manual:API
 
 ## Example
-
 ```js
 // @name Hollowing
 // @match https://github.com/*
@@ -29,13 +26,10 @@ addStyleSheet(`
 ```
 
 ## Metadata
-
 ### @name
-
 The userscript name.
 
 ### @match
-
 The url pattern.
 
 The extension uses [micromatch](https://www.npmjs.com/package/micromatch) internally for url matching.
@@ -46,7 +40,6 @@ only the basic `*` wildcard is recommended.
 [browser.userScripts]: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/userScripts
 
 ## CDN
-
-- [UNPKG](https://unpkg.com/)
 - [jsDelivr](https://www.jsdelivr.com/)
 - [Skypack](https://www.skypack.dev/)
+- [esm.sh](https://esm.sh/)
