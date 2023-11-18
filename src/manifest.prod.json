@@ -1,0 +1,25 @@
+{
+  "name": "Eternity"
+, "version": "0.2.0"
+, "manifest_version": 3
+, "minimum_chrome_version": "120"
+, "description": "A minimalist JavaScript user script loader and manager."
+, "author": "BlackGlory"
+, "options_ui": {
+    "page": "options.html"
+  , "open_in_tab": true
+  }
+, "action": {
+    "default_popup": "options.html"
+  }
+, "background": {
+    "service_worker": "background.js"
+  }
+, "permissions": [
+    "userScripts"
+  , "storage"
+  ]
+, "host_permissions": [
+    "<all_urls>"
+  ]
+}

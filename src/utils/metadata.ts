@@ -1,48 +1,70 @@
-import { go } from '@blackglory/go'
+import { isURLString } from 'extra-utils'
 
 export interface Metadata {
   name: string
-  urlPatterns: string[]
+  matches: string[]
+  updateURLs: string[]
 }
 
 export function parseMetadata(code: string): Metadata {
   let name: string | null = null
-  const urlPatterns: string[] = []
+  const matches: string[] = []
+  const updateURLs: string[] = []
 
   for (const { key, value } of parseMetadataLines(code)) {
     switch (key) {
-      case 'name':
+      case 'name': {
         name = parseNameValue(value)
         break
-      case 'match':
-        go(() => {
-          const urlPattern = parseMatchValue(value)
-          if (urlPattern) urlPatterns.push(urlPattern)
-        })
+      }
+      case 'match': {
+        const match = parseMatchValue(value)
+        if (match) matches.push(match)
         break
+      }
+      case 'update-url': {
+        const updateURL = parseUpdateURLValue(value)
+        if (updateURL) updateURLs.push(updateURL)
+        break
+      }
     }
   }
 
   if (name === null) throw new Error('The userscript needs a name.')
 
-  return { name, urlPatterns }
+  return {
+    name
+  , matches
+  , updateURLs
+  }
 }
 
 function parseNameValue(value: string): string {
   return value
 }
 
-export function parseMatchValue(str: string): string | null {
+function parseMatchValue(value: string): string | null {
   const re = /^(?<pattern>\S+)\s*$/
-  const matched = str.match(re)
+  const matched = value.match(re)
   if (!matched) return null
 
   const { pattern } = matched.groups!
   return pattern
 }
 
-export function* parseMetadataLines(code: string): Iterable<{ key: string, value: string }> {
-  const re = /^\/\/ @(?<key>\w+)[\s^\n]+(?<value>.*?)[\s^\n]*$/gm
+function parseUpdateURLValue(value: string): string | null {
+  if (isURLString(value)) {
+    return value
+  } else {
+    return null
+  }
+}
+
+export function* parseMetadataLines(code: string): Iterable<{
+  key: string
+  value: string
+}> {
+  const re = /^\/\/ @(?<key>[\w-]+)[\s^\n]+(?<value>.*?)[\s^\n]*$/gm
   for (const { groups } of code.matchAll(re)) {
     const { key, value } = groups!
     yield { key, value }

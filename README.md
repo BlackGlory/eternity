@@ -1,44 +1,55 @@
-# Elden
-Modern ECMAScript loader.
+# Eternity
+A minimalist JavaScript user script loader and manager.
 
-## Why
-I need [ES modules] and I don't care about [Greasemonkey API].
+In order to use this extension, you need Chrome 120 or above, and [developer mode] enabled.
+
+[developer mode]: https://developer.chrome.com/docs/extensions/reference/userScripts/#developer-mode-for-extension-users
+
+## When do you need this?
+When you want to load normal JavaScript scripts as user scripts, and
+- You need [ES modules].
+- You don't need [Greasemonkey API].
+- You always want user scripts to run as early as possible.
 
 [ES modules]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
 [Greasemonkey API]: https://wiki.greasespot.net/Greasemonkey_Manual:API
 
 ## Example
 ```js
-// @name Hollowing
-// @match https://github.com/*
-// @match https://www.reddit.com/r/*
-import { addStyleSheet } from 'https://unpkg.com/userstyle@0.1.1/dist/es2018/index.min.mjs'
+// @name Hello World
+// @match <all_urls>
+import { addStyleSheet } from 'https://esm.sh/userstyle@0.2.1'
 
 addStyleSheet(`
   *:before {
-    content: 'OHHH'
+    content: 'Hello'
   }
 
   *:after {
-    content: 'ELDEN RING'
+    content: 'World'
   }
 `)
 ```
 
 ## Metadata
+You need to write the metadata as comments at the beginning of the script,
+refer to the example for the format.
+
 ### @name
-The userscript name.
+The name of the user script.
 
 ### @match
-The url pattern.
+Specifies which pages this user script will be injected into.
 
-The extension uses [micromatch](https://www.npmjs.com/package/micromatch) internally for url matching.
-For backward compatibility (upgrade to [chrome.declarativeContent] or [browser.userScripts]),
-only the basic `*` wildcard is recommended.
+See [Chrome Extensions match patterns].
 
-[chrome.declarativeContent]: https://developer.chrome.com/docs/extensions/reference/declarativeContent/
-[browser.userScripts]: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/userScripts
+[Chrome Extensions match patterns]: https://developer.chrome.com/docs/extensions/mv3/match_patterns/
 
-## CDN
-- [jsDelivr](https://www.jsdelivr.com/)
-- [esm.sh](https://esm.sh/)
+You can specify multiple patterns via multiple `@match`.
+
+### @update-url
+The update URL of the user script.
+It is optional, Eternity accesses the URL to keep the user script up to date.
+
+You can specify multiple update URLs via multiple `@update-url`.
+Eternity will check them one by one in order until a usable user script is found.

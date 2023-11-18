@@ -11,5 +11,7 @@ module.exports = {
 , rules: {
     '@typescript-eslint/ban-types': 'off'
   , '@typescript-eslint/no-extra-semi': 'off'
+  , '@typescript-eslint/no-unused-vars': 'off'
+  , '@typescript-eslint/ban-ts-comment': 'off'
   }
 }
