@@ -26,8 +26,8 @@ export class Database extends Dexie {
   constructor() {
     super('Database')
 
-    this.version(1).stores({ userScripts: '++id,enabled' })
-    this.version(2).stores({ userScripts: 'id,enabled' }).upgrade(async tx => {
+    this.version(1).stores({ userScripts: '++id, enabled' })
+    this.version(2).stores({ userScripts: 'id, enabled' }).upgrade(async tx => {
       await tx.table('userScripts').toCollection().modify(userScript => {
         userScript.id = uuid()
         delete userScript.name
