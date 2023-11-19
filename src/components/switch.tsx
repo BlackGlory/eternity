@@ -9,6 +9,7 @@ interface ISwitchProps {
 export function Switch({ value, onClick }: ISwitchProps) {
   return (
     <HeadlessSwitch
+      title={value ? 'Disable' : 'Enable'}
       checked={value}
       onChange={onClick}
       className={classNames(
