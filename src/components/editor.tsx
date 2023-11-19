@@ -3,7 +3,7 @@ import { createBackgroundClient } from '@delight-rpc/webextension'
 import { IBackgroundAPI } from '@src/contract.js'
 import { useMountAsync } from 'extra-react-hooks'
 import { Button } from '@components/button.jsx'
-import { Checkbox } from '@components/checkbox.jsx'
+import { Switch } from '@components/switch.jsx'
 import { Helmet } from 'react-helmet-async'
 // import { editor } from 'monaco-editor'
 
@@ -54,7 +54,7 @@ export function Editor({ id }: IEditorProps) {
           window.close()
         }}>Delete</Button>
 
-        <Checkbox
+        <Switch
           value={enabled}
           onClick={async enabled => {
             await client.setUserScriptEnabled(id, enabled)

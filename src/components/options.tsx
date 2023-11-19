@@ -3,12 +3,14 @@ import { Button } from '@components/button.jsx'
 import { createBackgroundClient } from '@delight-rpc/webextension'
 import { IBackgroundAPI, IUserScript, IUserScriptListItem } from '@src/contract.js'
 import { useMountAsync } from 'extra-react-hooks'
-import { Checkbox } from '@components/checkbox.jsx'
 import { each } from 'extra-promise'
 import { isntEmptyArray } from '@blackglory/prelude'
 import { ClientProxy } from 'delight-rpc'
 import { useSelector, useUpdater } from 'extra-react-store'
 import { OptionsStoreContext } from '@utils/options-store.js'
+import { Switch } from '@components/switch.jsx'
+import { RemoveButton } from '@components/remove-button.jsx'
+import { UpdateButton } from '@components/update-button.jsx'
 
 export function Options() {
   const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
@@ -18,8 +20,8 @@ export function Options() {
   useMountAsync(refreshUserScriptList)
 
   return (
-    <div>
-      <nav>
+    <div className='min-w-[300px] min-h-[400px]'>
+      <nav className='flex gap-2 p-2 border-b bg-gray-50 '>
         <Button onClick={async () => {
           const id = await client.createUserScriptId()
 
@@ -37,7 +39,10 @@ export function Options() {
 
       <ul>
         {userScripts.map(userScript => (
-          <li key={userScript.id}>
+          <li
+            key={userScript.id}
+            className='border-b hover:bg-gray-100'
+          >
             <UserScriptListItem client={client} userScript={userScript} />
           </li>
         ))}
@@ -63,17 +68,8 @@ function UserScriptListItem({ client, userScript }: IUserScriptListItemProps) {
   const updateState = useUpdater(OptionsStoreContext)
 
   return (
-    <>
-      <a 
-        className='cursor-pointer hover:underline'
-        onClick={async () => {
-          await chrome.tabs.create({ url: getEditorURL(userScript.id) })
-        }}
-      >
-        {userScript.name}
-      </a>
-
-      <Checkbox
+    <div className='flex items-center gap-2 px-2'>
+      <Switch
         value={userScript.enabled}
         onClick={async enabled => {
           await client.setUserScriptEnabled(userScript.id, enabled)
@@ -87,23 +83,34 @@ function UserScriptListItem({ client, userScript }: IUserScriptListItemProps) {
         }}
       />
 
-      <Button onClick={async () => {
-        await client.removeUserScript(userScript.id)
+      <a
+        className='flex-1 py-2 cursor-pointer hover:underline'
+        onClick={async () => {
+          await chrome.tabs.create({ url: getEditorURL(userScript.id) })
+        }}
+      >
+        {userScript.name}
+      </a>
 
-        updateState(state => {
-          const index = state.userScripts.findIndex(x => x.id === userScript.id)
-          if (index >= 0) {
-            state.userScripts.splice(index, 1)
-          }
-        })
-      }}>Delete</Button>
+      <nav className='flex gap-1 items-center py-2'>
+        <RemoveButton onClick={async () => {
+          await client.removeUserScript(userScript.id)
 
-      {isUpdatable(userScript) && (
-        <Button onClick={async () => {
-          await client.updateUserScriptToLatest(userScript.id)
-        }}>Update</Button>
-      )}
-    </>
+          updateState(state => {
+            const index = state.userScripts.findIndex(x => x.id === userScript.id)
+            if (index >= 0) {
+              state.userScripts.splice(index, 1)
+            }
+          })
+        }} />
+
+        {isUpdatable(userScript) || true && (
+          <UpdateButton onClick={async () => {
+            await client.updateUserScriptToLatest(userScript.id)
+          }} />
+        )}
+      </nav>
+    </div>
   )
 }
 

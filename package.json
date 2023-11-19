@@ -62,6 +62,8 @@
     "@blackglory/http-status": "^2.0.2",
     "@blackglory/prelude": "^0.3.4",
     "@delight-rpc/webextension": "^0.2.1",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
     "classnames": "^2.3.2",
     "delight-rpc": "^6.1.2",
     "dexie": "^3.2.4",
