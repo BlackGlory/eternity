@@ -123,9 +123,8 @@ waitForLaunch().then(async details => {
 
   await configureCSP()
   await unregisterAllUserScripts()
-  const userScripts = await dao.getAllUserScripts()
-  const enabledUserScripts = userScripts.filter(x => x.enabled)
-  await each(enabledUserScripts, async userScript => {
+  const enabledScripts = await dao.getAllEnabledUserScripts()
+  await each(enabledScripts, async userScript => {
     await registerUserScript(userScript.id, userScript.matches, userScript.code)
   })
 })

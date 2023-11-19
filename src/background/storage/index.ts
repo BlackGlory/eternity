@@ -15,6 +15,15 @@ export class DAO {
     return objects.map(convertUserScriptObjectToUserScript)
   }
 
+  async getAllEnabledUserScripts(): Promise<IUserScript[]> {
+    const objects = await this.db.userScripts
+      .where('enabled')
+      .equals(Boolean.True)
+      .toArray()
+
+    return objects.map(convertUserScriptObjectToUserScript)
+  }
+
   async getUserScript(id: string): Promise<IUserScript | null> {
     const object = await this.db.userScripts.get(id)
 
