@@ -3,14 +3,28 @@
 , "version": "0.2.0"
 , "manifest_version": 3
 , "minimum_chrome_version": "120"
-, "description": "A minimalist JavaScript user script loader and manager."
+, "description": "A minimalist JavaScript user script loader and manager for modern browsers."
 , "author": "BlackGlory"
+, "icons": {
+    "16": "assets/images/icon-16.png"
+  , "32": "assets/images/icon-32.png"
+  , "48": "assets/images/icon-48.png"
+  , "64": "assets/images/icon-64.png"
+  , "128": "assets/images/icon-128.png"
+  }
 , "options_ui": {
     "page": "options.html"
   , "open_in_tab": false
   }
 , "action": {
     "default_popup": "options.html"
+  , "default_icon": {
+      "16": "assets/images/icon-16.png"
+    , "32": "assets/images/icon-32.png"
+    , "48": "assets/images/icon-48.png"
+    , "64": "assets/images/icon-64.png"
+    , "128": "assets/images/icon-128.png"
+    }
   }
 , "background": {
     "service_worker": "background.js"

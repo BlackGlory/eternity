@@ -1,9 +1,12 @@
 # Eternity
-A minimalist JavaScript user script loader and manager.
+![eternity-logo]
+
+A minimalist JavaScript user script loader and manager for modern browsers.
 
 In order to use this extension, you need Chrome 120 or above, and [developer mode] enabled.
 
 [developer mode]: https://developer.chrome.com/docs/extensions/reference/userScripts/#developer-mode-for-extension-users
+[eternity-logo]: src/assets/images/icon-128.png
 
 ## When do you need this?
 When you want to load normal JavaScript scripts as user scripts, and
