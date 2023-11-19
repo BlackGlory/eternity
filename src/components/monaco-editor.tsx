@@ -2,16 +2,23 @@ import { useEffect, useRef } from 'react'
 import * as monaco from 'monaco-editor'
 import { twMerge } from 'tailwind-merge'
 
-interface ICodeEditorProps {
-  className?: string
-  initialValue: string
+interface IMonacoEditorProps {
+  editorRef: React.MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>
 
-  onChange(value: string): void
+  className?: string
+  onReady?(): void
+  onChange?(value: string): void
 }
 
-export function CodeEditor({ className, initialValue, onChange }: ICodeEditorProps) {
+export function MonacoEditor(
+  {
+    editorRef
+  , className
+  , onReady
+  , onChange
+  }: IMonacoEditorProps
+) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>()
 
   useEffect(() => {
     if (containerRef.current) {
@@ -30,19 +37,17 @@ export function CodeEditor({ className, initialValue, onChange }: ICodeEditorPro
 
       editorRef.current = editor
 
+      onReady?.()
+
       return () => {
         editor.dispose()
-        editorRef.current = undefined
+        editorRef.current = null
       }
     }
   }, [])
 
   useEffect(() => {
-    editorRef.current?.setValue(initialValue)
-  }, [initialValue])
-
-  useEffect(() => {
-    if (editorRef.current) {
+    if (editorRef.current && onChange) {
       const editor = editorRef.current
 
       const disposable = editor.onDidChangeModelContent(() => {

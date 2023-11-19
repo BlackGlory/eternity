@@ -5,9 +5,10 @@ import { useMountAsync } from 'extra-react-hooks'
 import { Button } from '@components/button.jsx'
 import { Switch } from '@components/switch.jsx'
 import { Helmet } from 'react-helmet-async'
-import { CodeEditor } from '@components/code-editor.jsx'
+import { MonacoEditor } from '@components/monaco-editor.jsx'
 import { RemoveButton } from '@components/remove-button.jsx'
 import { UpdateButton } from '@components/update-button.jsx'
+import * as monaco from 'monaco-editor'
 
 export interface IEditorProps {
   id: string
@@ -15,11 +16,11 @@ export interface IEditorProps {
 
 export function Editor({ id }: IEditorProps) {
   const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>(null)
   const [name, setName] = useState('Unamed')
   const [enabled, setEnabled] = useState(false)
   const [code, setCode] = useState('')
   const [unsave, setUnsave] = useState(false)
-  const liveCodeRef = useRef<string>(code)
 
   useMountAsync(refreshUserScript)
 
@@ -73,13 +74,14 @@ export function Editor({ id }: IEditorProps) {
         </nav>
       </header>
 
-      <CodeEditor
+      <MonacoEditor
+        editorRef={editorRef}
         className='flex-1'
-        initialValue={code}
+        onReady={() => {
+          editorRef.current?.setValue(code)
+        }}
         onChange={value => {
           setUnsave(value !== code)
-
-          liveCodeRef.current = value
         }}
       />
 
@@ -87,19 +89,17 @@ export function Editor({ id }: IEditorProps) {
         <Button onClick={async () => {
           const userScript = await client.getUserScript(id)
 
-          if (userScript) {
-            setCode(userScript.code)
-          } else {
-            setCode('')
-          }
+          editorRef.current?.setValue(userScript?.code ?? '')
 
           setUnsave(false)
         }}>Reset</Button>
 
         <Button onClick={async () => {
-          await client.setUserScript(id, liveCodeRef.current)
+          if (editorRef.current) {
+            await client.setUserScript(id, editorRef.current.getValue())
 
-          await refreshUserScript()
+            await refreshUserScript()
+          }
         }}>Save</Button>
       </footer>
     </div>
@@ -110,8 +110,10 @@ export function Editor({ id }: IEditorProps) {
 
     if (userScript) {
       setName(userScript.name)
-      setCode(userScript.code)
       setEnabled(userScript.enabled)
+
+      setCode(userScript.code)
+      editorRef.current?.setValue(userScript.code)
       setUnsave(false)
     }
   }
