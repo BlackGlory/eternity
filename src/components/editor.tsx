@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { createBackgroundClient } from '@delight-rpc/webextension'
-import { IBackgroundAPI } from '@src/contract.js'
+import { IBackgroundAPI, IUserScript } from '@src/contract.js'
 import { useMountAsync } from 'extra-react-hooks'
 import { Button } from '@components/button.jsx'
 import { Switch } from '@components/switch.jsx'
@@ -9,6 +9,7 @@ import { MonacoEditor } from '@components/monaco-editor.jsx'
 import { RemoveButton } from '@components/remove-button.jsx'
 import { UpdateButton } from '@components/update-button.jsx'
 import * as monaco from 'monaco-editor'
+import { useImmer } from 'use-immer'
 
 export interface IEditorProps {
   id: string
@@ -17,10 +18,14 @@ export interface IEditorProps {
 export function Editor({ id }: IEditorProps) {
   const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>(null)
-  const [name, setName] = useState('Unamed')
-  const [enabled, setEnabled] = useState(false)
-  const [updatable, setUpdatable] = useState(false)
-  const [code, setCode] = useState('')
+  const [userScript, updateUserScript] = useImmer<IUserScript>({
+    id
+  , name: 'Unamed'
+  , code: ''
+  , enabled: true
+  , matches: []
+  , updateURLs: []
+  })
   const [unsave, setUnsave] = useState(false)
 
   useMountAsync(loadUserScript)
@@ -40,7 +45,7 @@ export function Editor({ id }: IEditorProps) {
   return (
     <div className='flex flex-col w-full h-screen max-h-screen overflow-hidden'>
       <Helmet>
-        <title>{name}</title>
+        <title>{userScript.name}</title>
       </Helmet>
 
       <header className='flex items-center gap-2 p-2'>
@@ -49,7 +54,7 @@ export function Editor({ id }: IEditorProps) {
           src='assets/images/icon-128.png'
         />
 
-        <h1 className='flex-1 text-base font-bold'>{name}</h1>
+        <h1 className='flex-1 text-base font-bold'>{userScript.name}</h1>
 
         <nav className='flex items-center gap-2'>
           <RemoveButton onClick={async () => {
@@ -59,7 +64,7 @@ export function Editor({ id }: IEditorProps) {
           }}/>
 
           <UpdateButton
-            disabled={!updatable}
+            disabled={userScript.updateURLs.length === 0}
             onClick={async () => {
               if (await client.updateUserScriptToLatest(id)) {
                 await loadUserScript()
@@ -68,11 +73,13 @@ export function Editor({ id }: IEditorProps) {
           />
 
           <Switch
-            value={enabled}
+            value={userScript.enabled}
             onClick={async enabled => {
               await client.setUserScriptEnabled(id, enabled)
 
-              setEnabled(enabled)
+              updateUserScript(userScript => {
+                userScript.enabled = enabled
+              })
             }}
           />
         </nav>
@@ -82,10 +89,10 @@ export function Editor({ id }: IEditorProps) {
         editorRef={editorRef}
         className='flex-1'
         onReady={() => {
-          editorRef.current?.setValue(code)
+          editorRef.current?.setValue(userScript.code)
         }}
         onChange={value => {
-          setUnsave(value !== code)
+          setUnsave(value !== userScript.code)
         }}
       />
 
@@ -113,13 +120,10 @@ export function Editor({ id }: IEditorProps) {
     const userScript = await client.getUserScript(id, signal)
 
     if (userScript) {
-      setName(userScript.name)
-      setEnabled(userScript.enabled)
-      setUpdatable(userScript.updateURLs.length > 0)
-
-      setCode(userScript.code)
-      editorRef.current?.setValue(userScript.code)
+      updateUserScript(userScript)
       setUnsave(false)
+
+      editorRef.current?.setValue(userScript.code)
     }
   }
 }
