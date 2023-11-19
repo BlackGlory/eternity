@@ -8,6 +8,9 @@ In order to use this extension, you need Chrome 120 or above, and [developer mod
 [developer mode]: https://developer.chrome.com/docs/extensions/reference/userScripts/#developer-mode-for-extension-users
 [eternity-logo]: src/assets/images/icon-128.png
 
+## Supported browsers and platforms
+- [x] Chrome
+
 ## When do you need this?
 When you want to load normal JavaScript scripts as user scripts, and
 - You need [ES modules].
