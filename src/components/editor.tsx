@@ -19,10 +19,11 @@ export function Editor({ id }: IEditorProps) {
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>(null)
   const [name, setName] = useState('Unamed')
   const [enabled, setEnabled] = useState(false)
+  const [updatable, setUpdatable] = useState(false)
   const [code, setCode] = useState('')
   const [unsave, setUnsave] = useState(false)
 
-  useMountAsync(refreshUserScript)
+  useMountAsync(loadUserScript)
 
   useEffect(() => {
     if (unsave) {
@@ -57,11 +58,14 @@ export function Editor({ id }: IEditorProps) {
             window.close()
           }}/>
 
-          <UpdateButton onClick={async () => {
-            if (await client.updateUserScriptToLatest(id)) {
-              await refreshUserScript()
-            }
-          }}/>
+          <UpdateButton
+            disabled={!updatable}
+            onClick={async () => {
+              if (await client.updateUserScriptToLatest(id)) {
+                await loadUserScript()
+              }
+            }}
+          />
 
           <Switch
             value={enabled}
@@ -98,19 +102,20 @@ export function Editor({ id }: IEditorProps) {
           if (editorRef.current) {
             await client.setUserScript(id, editorRef.current.getValue())
 
-            await refreshUserScript()
+            await loadUserScript()
           }
         }}>Save</Button>
       </footer>
     </div>
   )
 
-  async function refreshUserScript(signal?: AbortSignal): Promise<void> {
+  async function loadUserScript(signal?: AbortSignal): Promise<void> {
     const userScript = await client.getUserScript(id, signal)
 
     if (userScript) {
       setName(userScript.name)
       setEnabled(userScript.enabled)
+      setUpdatable(userScript.updateURLs.length > 0)
 
       setCode(userScript.code)
       editorRef.current?.setValue(userScript.code)

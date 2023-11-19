@@ -17,7 +17,7 @@ export function Options() {
   const userScripts = useSelector(OptionsStoreContext, state => state.userScripts)
   const updateState = useUpdater(OptionsStoreContext)
 
-  useMountAsync(refreshUserScriptList)
+  useMountAsync(loadUserScriptList)
 
   return (
     <div className='min-w-[300px] min-h-[400px]'>
@@ -50,7 +50,7 @@ export function Options() {
     </div>
   )
 
-  async function refreshUserScriptList(signal?: AbortSignal): Promise<void> {
+  async function loadUserScriptList(signal?: AbortSignal): Promise<void> {
     const userScripts = await client.getUserScriptList(signal)
 
     updateState(state => {
@@ -105,9 +105,12 @@ function UserScriptListItem({ client, userScript }: IUserScriptListItemProps) {
         }} />
 
         {isUpdatable(userScript) || true && (
-          <UpdateButton onClick={async () => {
-            await client.updateUserScriptToLatest(userScript.id)
-          }} />
+          <UpdateButton
+            disabled={userScript.updateURLs.length === 0}
+            onClick={async () => {
+              await client.updateUserScriptToLatest(userScript.id)
+            }}
+          />
         )}
       </nav>
     </div>
