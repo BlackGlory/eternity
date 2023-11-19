@@ -22,7 +22,7 @@ export function Editor({ id }: IEditorProps) {
   return (
     <div className='flex w-full h-full'>
       <Helmet>
-        <title>{name} - Eternity Editor</title>
+        <title>{name}</title>
       </Helmet>
 
       <nav>
