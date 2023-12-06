@@ -15,6 +15,7 @@ import { UpdateButton } from '@components/update-button.jsx'
 export function Options() {
   const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
   const userScripts = useSelector(OptionsStoreContext, state => state.userScripts)
+  const nameFilter = useSelector(OptionsStoreContext, state => state.nameFilter)
   const updateState = useUpdater(OptionsStoreContext)
 
   useMountAsync(loadUserScriptList)
@@ -37,15 +38,29 @@ export function Options() {
         }}>Update All Scripts</Button>
       </nav>
 
+      <input
+        className='h-8 p-2 border-b outline-none'
+        type='search'
+        placeholder='Filter'
+        value={nameFilter}
+        onChange={e => updateState(state => {
+          state.nameFilter = e.target.value
+        })}
+      />
+
       <ul className='flex-1 overflow-y-auto'>
-        {userScripts.map(userScript => (
-          <li
-            key={userScript.id}
-            className='border-b hover:bg-gray-100'
-          >
-            <UserScriptListItem client={client} userScript={userScript} />
-          </li>
-        ))}
+        {
+          userScripts
+            .filter(userScript => userScript.name.toLowerCase().includes(nameFilter.toLowerCase()))
+            .map(userScript => (
+              <li
+                key={userScript.id}
+                className='border-b hover:bg-gray-100'
+              >
+                <UserScriptListItem client={client} userScript={userScript} />
+              </li>
+            ))
+        }
       </ul>
     </div>
   )

@@ -3,11 +3,15 @@ import { Store, createStoreContext } from 'extra-react-store'
 
 interface IState {
   userScripts: IUserScriptListItem[]
+  nameFilter: string
 }
 
 export class OptionsStore extends Store<IState> {
   constructor() {
-    super({ userScripts: [] })
+    super({
+      userScripts: []
+    , nameFilter: ''
+    })
   }
 }
 
