@@ -20,7 +20,7 @@ export function Options() {
   useMountAsync(loadUserScriptList)
 
   return (
-    <div className='min-w-[300px] min-h-[400px]'>
+    <div className='flex flex-col min-w-[300px] min-h-[400px] max-h-screen overflow-y-hidden'>
       <nav className='flex gap-2 p-2 border-b bg-gray-50 '>
         <Button onClick={async () => {
           const id = await client.createUserScriptId()
@@ -37,7 +37,7 @@ export function Options() {
         }}>Update All Scripts</Button>
       </nav>
 
-      <ul>
+      <ul className='flex-1 overflow-y-auto'>
         {userScripts.map(userScript => (
           <li
             key={userScript.id}
