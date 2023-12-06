@@ -42,6 +42,10 @@ export function Editor({ id }: IEditorProps) {
     }
   }, [unsave])
 
+  useEffect(() => {
+    editorRef.current?.setValue(userScript.code)
+  }, [userScript.code])
+
   return (
     <div className='flex flex-col w-full h-screen max-h-screen overflow-hidden'>
       <Helmet>
@@ -121,9 +125,6 @@ export function Editor({ id }: IEditorProps) {
 
     if (userScript) {
       updateUserScript(userScript)
-      setUnsave(false)
-
-      editorRef.current?.setValue(userScript.code)
     }
   }
 }
