@@ -26,7 +26,6 @@ module.exports = {
     , '.cjs': ['.cjs', '.cts']
     , '.mjs': ['.mjs', '.mts']
     }
-
   }
 , module: {
     rules: [
