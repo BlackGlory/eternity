@@ -70,7 +70,7 @@ export function Editor({ id }: IEditorProps) {
           <UpdateButton
             disabled={userScript.updateURLs.length === 0}
             onClick={async () => {
-              if (await client.updateUserScriptToLatest(id)) {
+              if (await client.upgradeUserScriptToLatest(id)) {
                 await loadUserScript()
               }
             }}

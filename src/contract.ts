@@ -27,5 +27,5 @@ export interface IBackgroundAPI {
   getUserScript(id: string): IUserScript | null
   setUserScript(id: string, code: string): null
 
-  updateUserScriptToLatest(id: string): boolean
+  upgradeUserScriptToLatest(id: string): boolean
 }

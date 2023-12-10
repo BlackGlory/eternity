@@ -34,7 +34,7 @@ export function Options() {
             .filter(isUpdatable)
             .map(x => x.id)
 
-          await each(updatableScriptIds, id => client.updateUserScriptToLatest(id))
+          await each(updatableScriptIds, id => client.upgradeUserScriptToLatest(id))
         }}>Update All Scripts</Button>
       </nav>
 
@@ -123,7 +123,7 @@ function UserScriptListItem({ client, userScript }: IUserScriptListItemProps) {
           <UpdateButton
             disabled={userScript.updateURLs.length === 0}
             onClick={async () => {
-              await client.updateUserScriptToLatest(userScript.id)
+              await client.upgradeUserScriptToLatest(userScript.id)
             }}
           />
         )}

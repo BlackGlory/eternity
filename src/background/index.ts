@@ -64,7 +64,7 @@ const api: ImplementationOf<IBackgroundAPI> = {
 
     return null
   }
-, async updateUserScriptToLatest(id) {
+, async upgradeUserScriptToLatest(id) {
     const userScript = await dao.getUserScript(id)
 
     if (userScript) {
