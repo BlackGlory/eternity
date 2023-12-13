@@ -50,5 +50,6 @@ export async function unregisterUserScript(id: string): Promise<void> {
 }
 
 export function generateUserScriptId(): string {
+  // Chrome文档规定了脚本Id不能以`_`开头, 因此这里不能使用nanoid.
   return v4()
 }
