@@ -10,6 +10,7 @@ import { RemoveButton } from '@components/remove-button.jsx'
 import { UpdateButton } from '@components/update-button.jsx'
 import * as monaco from 'monaco-editor'
 import { useImmer } from 'use-immer'
+import { toString } from '@blackglory/prelude'
 
 export interface IEditorProps {
   id: string
@@ -111,9 +112,14 @@ export function Editor({ id }: IEditorProps) {
 
         <Button onClick={async () => {
           if (editorRef.current) {
-            await client.setUserScript(id, editorRef.current.getValue())
+            try {
+              await client.setUserScript(id, editorRef.current.getValue())
+              await loadUserScript()
+            } catch (e) {
+              alert(toString(e))
 
-            await loadUserScript()
+              console.error(e)
+            }
           }
         }}>Save</Button>
       </footer>
