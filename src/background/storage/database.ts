@@ -1,5 +1,5 @@
 import { Dexie } from 'dexie'
-import { uuid } from '@utils/uuid.js'
+import { generateUserScriptId } from '@utils/user-script.js'
 
 /**
  * @deprecated
@@ -29,9 +29,15 @@ export class Database extends Dexie {
     this.version(1).stores({ userScripts: '++id, enabled' })
     this.version(2).stores({ userScripts: 'id, enabled' }).upgrade(async tx => {
       await tx.table('userScripts').toCollection().modify(userScript => {
-        userScript.id = uuid()
+        userScript.id = generateUserScriptId()
         delete userScript.name
         delete userScript.urlPatterns
+      })
+    })
+    this.version(3).stores({ userScripts: 'id, enabled' }).upgrade(async tx => {
+      await tx.table('userScripts').toCollection().modify(userScript => {
+        // regenerate script id
+        userScript.id = generateUserScriptId()
       })
     })
     this.userScripts = this.table('userScripts')

@@ -7,7 +7,7 @@ import { Deferred, each } from 'extra-promise'
 import { createServer } from '@delight-rpc/webextension'
 import { applyPropertyDecorators } from 'extra-proxy'
 import { pass } from '@blackglory/prelude'
-import { uuid } from '@utils/uuid.js'
+import { generateUserScriptId } from '@utils/user-script.js'
 import { fetch } from 'extra-fetch'
 import { ok, toText } from 'extra-response'
 import { configureCSP, registerUserScript, unregisterAllUserScripts, unregisterUserScript } from '@utils/user-script.js'
@@ -27,9 +27,7 @@ const api: ImplementationOf<IBackgroundAPI> = {
     , updateURLs: x.updateURLs
     }))
   }
-, createUserScriptId() {
-    return uuid()
-  }
+, generateUserScriptId
 , async setUserScriptEnabled(id, enabled) {
     await dao.updateUserScriptEnabled(id, enabled)
 

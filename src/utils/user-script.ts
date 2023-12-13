@@ -1,5 +1,6 @@
 import { pass } from '@blackglory/prelude'
 import { esm } from '@utils/esm.js'
+import { v4 } from 'uuid'
 
 export function isUserScriptsAPIAvailable(): boolean {
   try {
@@ -46,4 +47,8 @@ export async function unregisterUserScript(id: string): Promise<void> {
   } catch {
     pass()
   }
+}
+
+export function generateUserScriptId(): string {
+  return v4()
 }

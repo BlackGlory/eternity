@@ -784,6 +784,11 @@
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.4.tgz#0a41252ad431c473158b22f9bfb9a63df7541cff"
   integrity sha512-MMzuxN3GdFwskAnb6fz0orFvhfqi752yjaXylr0Rp4oDg5H0Zn1IuyRhDVvYOwAXoJirx2xuS16I3WjxnAIHiQ==
 
+"@types/uuid@^9.0.7":
+  version "9.0.7"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-9.0.7.tgz#b14cebc75455eeeb160d5fe23c2fcc0c64f724d8"
+  integrity sha512-WUtIVRUZ9i5dYXefDEAI7sh9/O7jGvHg7Df/5O/gtH3Yabe5odI3UWopVR1qbPXQtvOxWu3mM4XxlYeZtMWF4g==
+
 "@types/webextension-polyfill@^0.10.7":
   version "0.10.7"
   resolved "https://registry.yarnpkg.com/@types/webextension-polyfill/-/webextension-polyfill-0.10.7.tgz#de059250599733a60ed26c8a0c81e21e11183b90"
@@ -3258,11 +3263,6 @@ nanoid@^4.0.2:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-4.0.2.tgz#140b3c5003959adbebf521c170f282c5e7f9fb9e"
   integrity sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==
 
-nanoid@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-5.0.4.tgz#d2b608d8169d7da669279127615535705aa52edf"
-  integrity sha512-vAjmBf13gsmhXSgBrtIclinISzFFy22WwCYoyilZlsrRXNIHSwgFQ1bEdjRwMT3aoadeIF6HMuDRlOxzfXV8ig==
-
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
@@ -4655,6 +4655,11 @@ util-deprecate@^1.0.1, util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
+
+uuid@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
+  integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"

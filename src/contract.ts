@@ -20,7 +20,7 @@ export interface IUserScriptListItem {
 export interface IBackgroundAPI {
   getUserScriptList(): IUserScriptListItem[]
 
-  createUserScriptId(): string
+  generateUserScriptId(): string
   setUserScriptEnabled(id: string, enabled: boolean): null
   removeUserScript(id: string): null
 
