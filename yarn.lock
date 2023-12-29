@@ -2124,10 +2124,10 @@ extra-rand@^0.1.1:
   resolved "https://registry.yarnpkg.com/extra-rand/-/extra-rand-0.1.5.tgz#5a3bbba6bbc8ed4e2c0c9dc66a4a2b6a309040df"
   integrity sha512-xOaelLjCoQrCjnpNHCwoKHew4Jiu2ZeFGVEce0MgFCvPoZGnu9KO/zv+OObnvV4Np8k05/Q0x1GaEqHXuveeYg==
 
-extra-react-hooks@^0.6.5:
-  version "0.6.5"
-  resolved "https://registry.yarnpkg.com/extra-react-hooks/-/extra-react-hooks-0.6.5.tgz#da1bc4424f44eaffa10e864144aa3eeef5a609b5"
-  integrity sha512-/k9rA45EtJQD8fRJzr2eU1G/K79r7fsjFsuvvU0l1rU8M24eLB9yUVa9lx5R6ZKuglH5BM+Zy2fMR2vbxVZ9Qw==
+extra-react-hooks@^0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/extra-react-hooks/-/extra-react-hooks-0.6.6.tgz#1b5178c1f102ad80386f49095601000fb5fbe387"
+  integrity sha512-DqmCNQS9ndTZ6LY5Le4F3L2ZwhmmtMbyC/ROZENRD7arW9YYxBg8SRFEDP6uUlnPRG+cq/zt1DPo8CzTOkSEWQ==
   dependencies:
     "@blackglory/prelude" "^0.3.3"
     extra-abort "^0.3.7"
@@ -2173,10 +2173,18 @@ extra-timers@^0.2.5, extra-timers@^0.2.6:
   dependencies:
     extra-rand "^0.1.1"
 
-extra-utils@^5.1.0, extra-utils@^5.1.1, extra-utils@^5.2.0, extra-utils@^5.4.0, extra-utils@^5.5.2:
+extra-utils@^5.1.0, extra-utils@^5.1.1, extra-utils@^5.2.0, extra-utils@^5.4.0:
   version "5.5.2"
   resolved "https://registry.yarnpkg.com/extra-utils/-/extra-utils-5.5.2.tgz#b8c0aba0b3431129c98c67f23454cd53cbee3a88"
   integrity sha512-fRjbh89jv3WNpUWfcydUI4uDDcpMiFaEcR/fcblJsyWTClTd2VAzxS6IosM+hMiC58K08cj0Kz8lcz474E/Ndw==
+  dependencies:
+    justypes "^4.2.0"
+    lodash-es "^4.17.21"
+
+extra-utils@^5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/extra-utils/-/extra-utils-5.6.0.tgz#682886104a847f502b0d471279625e9c919d05c2"
+  integrity sha512-th03I1IBHyen1guCS5QR0pV/pqq5iJCQ/ifX66YhkSNAIaS2aSRA+Rp0KqCTpKNdyc+7LeCQP4nM1eJt0NZ+2Q==
   dependencies:
     justypes "^4.2.0"
     lodash-es "^4.17.21"
