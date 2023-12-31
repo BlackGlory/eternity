@@ -79,7 +79,7 @@ export function Editor({ id }: IEditorProps) {
 
           <Switch
             value={userScript.enabled}
-            onClick={async enabled => {
+            onChange={async enabled => {
               await client.setUserScriptEnabled(id, enabled)
 
               updateUserScript(userScript => {

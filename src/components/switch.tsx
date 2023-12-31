@@ -3,15 +3,15 @@ import classNames from 'classnames'
 
 interface ISwitchProps {
   value: boolean
-  onClick: (value: boolean) => void
+  onChange: (value: boolean) => void
 }
 
-export function Switch({ value, onClick }: ISwitchProps) {
+export function Switch({ value, onChange }: ISwitchProps) {
   return (
     <HeadlessSwitch
       title={value ? 'Disable' : 'Enable'}
       checked={value}
-      onChange={onClick}
+      onChange={onChange}
       className={classNames(
         'inline-flex h-4 w-7 rounded-full items-center'
       , value ? 'bg-gray-700' : 'bg-gray-300'

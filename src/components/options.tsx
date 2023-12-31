@@ -86,7 +86,7 @@ function UserScriptListItem({ client, userScript }: IUserScriptListItemProps) {
     <div className='flex items-center gap-2 px-2'>
       <Switch
         value={userScript.enabled}
-        onClick={async enabled => {
+        onChange={async enabled => {
           await client.setUserScriptEnabled(userScript.id, enabled)
 
           updateState(state => {
