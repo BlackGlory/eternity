@@ -21,9 +21,11 @@ export function MonacoEditor(
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (containerRef.current) {
+    const container = containerRef.current
+
+    if (container) {
       const editor = monaco.editor.create(
-        containerRef.current
+        container
       , {
           language: 'javascript'
         , minimap: { enabled: false }
@@ -47,9 +49,9 @@ export function MonacoEditor(
   }, [])
 
   useEffect(() => {
-    if (editorRef.current && onChange) {
-      const editor = editorRef.current
+    const editor = editorRef.current
 
+    if (editor && onChange) {
       const disposable = editor.onDidChangeModelContent(() => {
         onChange(editor.getValue())
       })

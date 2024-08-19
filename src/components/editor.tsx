@@ -44,7 +44,13 @@ export function Editor({ id }: IEditorProps) {
   }, [unsave])
 
   useEffect(() => {
-    editorRef.current?.setValue(userScript.code)
+    const editor = editorRef.current
+
+    if (editor) {
+      if (editor.getValue() !== userScript.code) {
+        editor.setValue(userScript.code)
+      }
+    }
   }, [userScript.code])
 
   return (
@@ -93,35 +99,42 @@ export function Editor({ id }: IEditorProps) {
       <MonacoEditor
         editorRef={editorRef}
         className='flex-1'
-        onReady={() => {
-          editorRef.current?.setValue(userScript.code)
-        }}
-        onChange={value => {
-          setUnsave(value !== userScript.code)
-        }}
+        onReady={() => editorRef.current?.setValue(userScript.code)}
+        onChange={value => setUnsave(userScript.code !== value)}
       />
 
       <footer className='flex justify-end gap-2 p-2'>
         <Button onClick={async () => {
-          const userScript = await client.getUserScript(id)
+          const editor = editorRef.current
 
-          editorRef.current?.setValue(userScript?.code ?? '')
+          if (editor) {
+            const userScript = await client.getUserScript(id)
 
-          setUnsave(false)
+            editor.setValue(userScript?.code ?? '')
+
+            setUnsave(false)
+          }
         }}>Reset</Button>
 
-        <Button onClick={async () => {
-          if (editorRef.current) {
-            try {
-              await client.setUserScript(id, editorRef.current.getValue())
-              await loadUserScript()
-            } catch (e) {
-              alert(toString(e))
+        <Button
+          disabled={!unsave}
+          onClick={async () => {
+            const editor = editorRef.current
 
-              console.error(e)
+            if (editor) {
+              try {
+                await client.setUserScript(id, editor.getValue())
+                await loadUserScript()
+                setUnsave(false)
+                editor.focus()
+              } catch (e) {
+                alert(toString(e))
+
+                console.error(e)
+              }
             }
-          }
-        }}>Save</Button>
+          }}
+        >Save</Button>
       </footer>
     </div>
   )
