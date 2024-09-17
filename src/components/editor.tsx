@@ -14,15 +14,16 @@ import { toString } from '@blackglory/prelude'
 
 export interface IEditorProps {
   id: string
+  referrer?: string
 }
 
-export function Editor({ id }: IEditorProps) {
+export function Editor({ id, referrer }: IEditorProps) {
   const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>(null)
   const [userScript, updateUserScript] = useImmer<IUserScript>({
     id
   , name: 'Unamed'
-  , code: ''
+  , code: getCodePlaceholder()
   , enabled: true
   , matches: []
   , updateURLs: []
@@ -110,7 +111,7 @@ export function Editor({ id }: IEditorProps) {
           if (editor) {
             const userScript = await client.getUserScript(id)
 
-            editor.setValue(userScript?.code ?? '')
+            editor.setValue(userScript?.code ?? getCodePlaceholder())
 
             setUnsave(false)
           }
@@ -145,5 +146,18 @@ export function Editor({ id }: IEditorProps) {
     if (userScript) {
       updateUserScript(userScript)
     }
+  }
+
+  function getCodePlaceholder(): string {
+    const lines: string[] = []
+    lines.push(`// @name `)
+
+    if (referrer) {
+      lines.push(`// @match ${referrer}`)
+    } else {
+      lines.push(`// @match <all_urls>`)
+    }
+
+    return lines.join('\n')
   }
 }

@@ -10,9 +10,14 @@ assert(main, 'The main element not found')
 const id = new URL(document.URL).searchParams.get('id')
 assert(id)
 
+const referrer = new URL(document.URL).searchParams.get('referrer')
+
 const root = createRoot(main)
 root.render(
   <HelmetProvider>
-    <Editor id={id} />
+    <Editor
+      id={id}
+      referrer={referrer ?? undefined}
+    />
   </HelmetProvider>
 )

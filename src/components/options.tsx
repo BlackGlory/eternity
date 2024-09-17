@@ -11,6 +11,8 @@ import { OptionsStoreContext } from '@utils/options-store.js'
 import { Switch } from '@components/switch.jsx'
 import { RemoveButton } from '@components/remove-button.jsx'
 import { UpdateButton } from '@components/update-button.jsx'
+import { appendSearchParam } from 'url-operator'
+import { getActiveTab } from 'extra-webextension'
 
 export function Options() {
   const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
@@ -22,11 +24,12 @@ export function Options() {
 
   return (
     <div className='flex flex-col min-w-[300px] min-h-[400px] max-h-screen overflow-y-hidden'>
-      <nav className='flex gap-2 p-2 border-b bg-gray-50 '>
+      <nav className='flex gap-2 p-2 border-b bg-gray-50'>
         <Button onClick={async () => {
           const id = await client.generateUserScriptId()
+          const activeTab = await getActiveTab()
 
-          await chrome.tabs.create({ url: getEditorURL(id) })
+          await chrome.tabs.create({ url: getEditorURL(id, activeTab.url) })
         }}>New Script</Button>
 
         <Button onClick={async () => {
@@ -136,6 +139,14 @@ function isUpdatable(userScript: IUserScriptListItem | IUserScript): boolean {
   return isntEmptyArray(userScript.updateURLs)
 }
 
-function getEditorURL(userScriptId: string): string {
-  return chrome.runtime.getURL(`editor.html?id=${userScriptId}`)
+function getEditorURL(userScriptId: string, referrer?: string): string {
+  let url = new URL(chrome.runtime.getURL('editor.html'))
+
+  url = appendSearchParam(url, 'id', userScriptId)
+
+  if (referrer) {
+    url = appendSearchParam(url, 'referrer', referrer)
+  }
+
+  return url.href
 }

@@ -4786,6 +4786,13 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+url-operator@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/url-operator/-/url-operator-0.3.1.tgz#5e7f36529edbad2e11f9e0975e377233c15d855d"
+  integrity sha512-Tyeu8JCmkE8YPKTuu9cP+dkphoMZcM0jJY8TOXx8dkOre6JLBdYKR6bn8xylSSbeHOGt7gX9trmDpIiqSazirA==
+  dependencies:
+    "@blackglory/prelude" "^0.3.1"
+
 use-immer@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/use-immer/-/use-immer-0.10.0.tgz#ed23afd424454604cb42bc112a455bddba894309"
