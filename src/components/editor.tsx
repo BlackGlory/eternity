@@ -55,7 +55,15 @@ export function Editor({ id, referrer }: IEditorProps) {
   }, [userScript.code])
 
   return (
-    <div className='flex flex-col w-full h-screen max-h-screen overflow-hidden'>
+    <div
+      className='flex flex-col w-full h-screen max-h-screen overflow-hidden'
+      onKeyDown={async e => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+          e.preventDefault()
+          await saveUserScript()
+        }
+      }}
+    >
       <Helmet>
         <title>{userScript.name}</title>
       </Helmet>
@@ -119,22 +127,7 @@ export function Editor({ id, referrer }: IEditorProps) {
 
         <Button
           disabled={!unsave}
-          onClick={async () => {
-            const editor = editorRef.current
-
-            if (editor) {
-              try {
-                await client.setUserScript(id, editor.getValue())
-                await loadUserScript()
-                setUnsave(false)
-                editor.focus()
-              } catch (e) {
-                alert(toString(e))
-
-                console.error(e)
-              }
-            }
-          }}
+          onClick={() => saveUserScript()}
         >Save</Button>
       </footer>
     </div>
@@ -145,6 +138,23 @@ export function Editor({ id, referrer }: IEditorProps) {
 
     if (userScript) {
       updateUserScript(userScript)
+    }
+  }
+
+  async function saveUserScript(signal?: AbortSignal): Promise<void> {
+    const editor = editorRef.current
+
+    if (editor) {
+      try {
+        await client.setUserScript(id, editor.getValue(), signal)
+        await loadUserScript(signal)
+        setUnsave(false)
+        editor.focus()
+      } catch (e) {
+        alert(toString(e))
+
+        console.error(e)
+      }
     }
   }
 
