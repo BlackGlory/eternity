@@ -122,14 +122,12 @@ function UserScriptListItem({ client, userScript }: IUserScriptListItemProps) {
           })
         }} />
 
-        {isUpdatable(userScript) || true && (
-          <UpdateButton
-            disabled={userScript.updateURLs.length === 0}
-            onClick={async () => {
-              await client.upgradeUserScriptToLatest(userScript.id)
-            }}
-          />
-        )}
+        <UpdateButton
+          disabled={!isUpdatable(userScript)}
+          onClick={async () => {
+            await client.upgradeUserScriptToLatest(userScript.id)
+          }}
+        />
       </nav>
     </div>
   )
