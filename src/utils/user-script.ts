@@ -4,7 +4,6 @@ import { v4 } from 'uuid'
 
 export function isUserScriptsAPIAvailable(): boolean {
   try {
-    // @ts-ignore
     chrome.userScripts
     return true
   } catch {
@@ -13,14 +12,12 @@ export function isUserScriptsAPIAvailable(): boolean {
 }
 
 export async function configureCSP(): Promise<void> {
-  // @ts-ignore
   await chrome.userScripts.configureWorld({
     csp: "default-src * data: blob: 'unsafe-eval' 'unsafe-inline'"
   })
 }
 
 export async function unregisterAllUserScripts(): Promise<void> {
-  // @ts-ignore
   await chrome.userScripts.unregister()
 }
 
@@ -31,7 +28,6 @@ export async function registerUserScript(
 ): Promise<void> {
   await unregisterUserScript(id)
 
-  // @ts-ignore
   await chrome.userScripts.register([{
     id
   , matches
@@ -42,7 +38,6 @@ export async function registerUserScript(
 
 export async function unregisterUserScript(id: string): Promise<void> {
   try {
-    // @ts-ignore
     await chrome.userScripts.unregister({ ids: [id] })
   } catch {
     pass()
@@ -50,6 +45,6 @@ export async function unregisterUserScript(id: string): Promise<void> {
 }
 
 export function generateUserScriptId(): string {
-  // Chrome文档规定了脚本Id不能以`_`开头, 因此这里不能使用nanoid.
+  // Chrome文档规定了脚本Id不能以`_`开头, 因此这里不能使用nanoid这样的UUID.
   return v4()
 }
