@@ -1,6 +1,7 @@
 import '@src/globals.css'
 import { createRoot } from 'react-dom/client'
 import { Editor } from '@components/editor.jsx'
+import { SystemThemeProvider } from '@utils/dark-light-mode.jsx'
 import { assert } from '@blackglory/prelude'
 import { HelmetProvider } from 'react-helmet-async'
 
@@ -15,9 +16,11 @@ const referrer = new URL(document.URL).searchParams.get('referrer')
 const root = createRoot(main)
 root.render(
   <HelmetProvider>
-    <Editor
-      id={id}
-      referrer={referrer ?? undefined}
-    />
+    <SystemThemeProvider>
+      <Editor
+        id={id}
+        referrer={referrer ?? undefined}
+      />
+    </SystemThemeProvider>
   </HelmetProvider>
 )
