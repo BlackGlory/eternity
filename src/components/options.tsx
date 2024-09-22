@@ -24,7 +24,7 @@ export function Options() {
 
   return (
     <div className='flex flex-col min-w-[300px] min-h-[400px] max-h-screen overflow-y-hidden'>
-      <nav className='flex gap-2 p-2 border-b bg-gray-50'>
+      <nav className='flex gap-2 p-2 border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-900'>
         <Button onClick={async () => {
           const id = await client.generateUserScriptId()
           const activeTab = await getActiveTab()
@@ -42,7 +42,7 @@ export function Options() {
       </nav>
 
       <input
-        className='h-8 p-2 border-b outline-none'
+        className='h-8 p-2 border-b outline-none dark:border-gray-700'
         type='search'
         placeholder='Filter'
         value={nameFilter}
@@ -58,7 +58,7 @@ export function Options() {
             .map(userScript => (
               <li
                 key={userScript.id}
-                className='border-b hover:bg-gray-100'
+                className='border-b dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800'
               >
                 <UserScriptListItem client={client} userScript={userScript} />
               </li>
