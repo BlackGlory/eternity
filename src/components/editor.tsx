@@ -68,7 +68,7 @@ export function Editor({ id, referrer }: IEditorProps) {
         <title>{userScript.name}</title>
       </Helmet>
 
-      <header className='flex items-center gap-2 p-2'>
+      <header className='flex items-center gap-2 p-2 border-b dark:border-gray-800'>
         <img
           className='w-6 h-6'
           src='assets/images/icon-128.png'
@@ -112,7 +112,7 @@ export function Editor({ id, referrer }: IEditorProps) {
         onChange={value => setUnsave(userScript.code !== value)}
       />
 
-      <footer className='flex justify-end gap-2 p-2'>
+      <footer className='flex justify-end gap-2 p-2 border-t dark:border-gray-800'>
         <Button onClick={async () => {
           const editor = editorRef.current
 
