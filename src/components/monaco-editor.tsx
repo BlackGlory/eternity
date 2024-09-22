@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import * as monaco from 'monaco-editor'
 import { twMerge } from 'tailwind-merge'
+import { useSystemTheme } from '@utils/dark-light-mode.jsx'
 
 interface IMonacoEditorProps {
   editorRef: React.MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>
@@ -19,6 +20,7 @@ export function MonacoEditor(
   }: IMonacoEditorProps
 ) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const theme = useSystemTheme()
 
   useEffect(() => {
     const container = containerRef.current
@@ -30,7 +32,7 @@ export function MonacoEditor(
           language: 'javascript'
         , minimap: { enabled: false }
         , tabSize: 2
-        , theme: 'vs-dark'
+        , theme: theme === 'light' ? 'vs' : 'vs-dark'
         , wordWrap: 'on'
         , scrollBeyondLastLine: false
         , automaticLayout: true
@@ -46,7 +48,7 @@ export function MonacoEditor(
         editorRef.current = null
       }
     }
-  }, [])
+  }, [theme])
 
   useEffect(() => {
     const editor = editorRef.current
