@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react'
 import * as monaco from 'monaco-editor'
 import { twMerge } from 'tailwind-merge'
 import { useDarkMode } from '@hooks/use-dark-mode.js'
+import { assert } from '@blackglory/prelude'
+import { useMount } from 'extra-react-hooks'
 
 interface IMonacoEditorProps {
   editorRef: React.MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>
@@ -22,40 +24,48 @@ export function MonacoEditor(
   const containerRef = useRef<HTMLDivElement>(null)
   const isDarkMode = useDarkMode()
 
-  useEffect(() => {
+  useMount(() => {
     const container = containerRef.current
+    assert(container)
 
-    if (container) {
-      const editor = monaco.editor.create(
-        container
-      , {
-          language: 'javascript'
-        , minimap: { enabled: false }
-        , tabSize: 2
-        , theme: isDarkMode
-               ? 'vs-dark'
-               : 'vs'
-        , wordWrap: 'on'
-        , scrollBeyondLastLine: false
-        , automaticLayout: true
-        }
-      )
-
-      editorRef.current = editor
-
-      onReady?.()
-
-      return () => {
-        editor.dispose()
-        editorRef.current = null
+    const editor = monaco.editor.create(
+      container
+    , {
+        language: 'javascript'
+      , minimap: { enabled: false }
+      , tabSize: 2
+      , wordWrap: 'on'
+      , scrollBeyondLastLine: false
+      , automaticLayout: true
       }
+    )
+
+    editorRef.current = editor
+
+    onReady?.()
+
+    return () => {
+      editor.dispose()
+      editorRef.current = null
     }
+  })
+
+  useEffect(() => {
+    const editor = editorRef.current
+    assert(editor)
+
+    editor.updateOptions({
+      theme: isDarkMode
+           ? 'vs-dark'
+           : 'vs'
+    })
   }, [isDarkMode])
 
   useEffect(() => {
     const editor = editorRef.current
+    assert(editor)
 
-    if (editor && onChange) {
+    if (onChange) {
       const disposable = editor.onDidChangeModelContent(() => {
         onChange(editor.getValue())
       })
