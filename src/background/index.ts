@@ -71,7 +71,7 @@ const api: ImplementationOf<IBackgroundAPI> = {
           const code = await fetch(updateURL)
             .then(ok)
             .then(toText)
-          
+
           await this.setUserScript(id, code)
 
           return true
@@ -91,11 +91,11 @@ createServer<IBackgroundAPI>(
     api
   , Object.keys(api) as Array<keyof IBackgroundAPI>
   , (fn: (...args: unknown[]) => unknown) => {
-      return async function (...args: unknown[]): Promise<unknown> {
+      return async function (this: typeof api, ...args: unknown[]): Promise<unknown> {
         // 等待初始化/迁移执行完毕
         await launched
 
-        return await fn(...args)
+        return await Reflect.apply(fn, this, args)
       }
     }
   ) as ImplementationOf<IBackgroundAPI>
