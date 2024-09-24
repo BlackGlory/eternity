@@ -7,7 +7,7 @@ export interface Metadata {
 }
 
 export function parseMetadata(code: string): Metadata {
-  let name: string | null = null
+  let name: string = 'Unamed'
   const matches: string[] = []
   const updateURLs: string[] = []
 
@@ -29,8 +29,6 @@ export function parseMetadata(code: string): Metadata {
       }
     }
   }
-
-  if (name === null) throw new Error('The userscript needs a name.')
 
   return {
     name
