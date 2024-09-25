@@ -68,10 +68,11 @@ function convertUserScriptObjectToUserScript(obj: IUserScriptObjectV2): IUserScr
 
   return {
     id: obj.id
-  , code: obj.code
   , enabled: obj.enabled === Boolean.True
-  , name: metadata.name
+
+  , name: metadata.name ?? 'Unamed'
   , matches: metadata.matches
   , updateURLs: metadata.updateURLs
+  , code: obj.code
   }
 }

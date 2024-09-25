@@ -91,7 +91,7 @@ createServer<IBackgroundAPI>(
     api
   , Object.keys(api) as Array<keyof IBackgroundAPI>
   , (fn: (...args: unknown[]) => unknown) => {
-      return async function (this: typeof api, ...args: unknown[]): Promise<unknown> {
+      return async function (this: unknown, ...args: unknown[]): Promise<unknown> {
         // 等待初始化/迁移执行完毕
         await launched
 
