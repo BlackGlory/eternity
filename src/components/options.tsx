@@ -29,10 +29,8 @@ export function Options() {
 
         border-b
         border-gray-200
-        dark:border-gray-700
 
         bg-gray-50
-        dark:bg-gray-900
       `}>
         <Button onClick={async () => {
           const id = await client.generateUserScriptId()
@@ -57,7 +55,10 @@ export function Options() {
 
           border-b
           border-gray-200
-          dark:border-gray-700
+
+          bg-gray-50
+
+          text-black
         `}
         type='search'
         placeholder='Filter'
@@ -77,9 +78,7 @@ export function Options() {
                 className={`
                   border-b
                   border-gray-200
-                  dark:border-gray-700
                   hover:bg-gray-100
-                  hover:dark:bg-gray-800
                 `}
               >
                 <UserScriptListItem client={client} userScript={userScript} />

@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import * as monaco from 'monaco-editor'
 import { twMerge } from 'tailwind-merge'
-import { useDarkMode } from '@hooks/use-dark-mode.js'
 import { assert } from '@blackglory/prelude'
 import { useMount } from 'extra-react-hooks'
 
@@ -22,7 +21,6 @@ export function MonacoEditor(
   }: IMonacoEditorProps
 ) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const isDarkMode = useDarkMode()
 
   useMount(() => {
     const container = containerRef.current
@@ -49,17 +47,6 @@ export function MonacoEditor(
       editorRef.current = null
     }
   })
-
-  useEffect(() => {
-    const editor = editorRef.current
-    assert(editor)
-
-    editor.updateOptions({
-      theme: isDarkMode
-           ? 'vs-dark'
-           : 'vs'
-    })
-  }, [isDarkMode])
 
   useEffect(() => {
     const editor = editorRef.current

@@ -70,7 +70,6 @@ export function Editor({ id, referrer }: IEditorProps) {
 
         border-b
         border-gray-200
-        dark:border-gray-800
       `}>
         <img
           className='w-6 h-6'
@@ -120,7 +119,6 @@ export function Editor({ id, referrer }: IEditorProps) {
 
         border-t
         border-gray-200
-        dark:border-gray-800
       `}>
         <Button onClick={async () => {
           const editor = editorRef.current

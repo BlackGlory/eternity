@@ -7,15 +7,12 @@ export const IconButton = twc.button`
   disabled:cursor-default
 
   border-gray-200
-  dark:border-gray-600
 
   bg-white
-  hover:bg-gray-300 hover:dark:bg-gray-700
-  disabled:bg-gray-300 disabled:dark:bg-gray-800
+  hover:bg-gray-300
+  disabled:bg-gray-300
 
   text-gray-700
-  dark:text-gray-400
   hover:text-gray-900
   disabled:text-white
-  disabled:dark:text-gray-400
 `

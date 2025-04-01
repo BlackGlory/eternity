@@ -21,7 +21,7 @@ export function Switch({ value, onChange }: ISwitchProps) {
       , 'cursor-pointer disabled:cursor-default'
       , value
       ? 'bg-gray-700'
-      : 'bg-gray-300 dark:bg-gray-700'
+      : 'bg-gray-300'
       )}
     >
       <span
@@ -29,7 +29,7 @@ export function Switch({ value, onChange }: ISwitchProps) {
           'inline-block h-2 w-2 rounded-full transform bg-white transition'
         , value
         ? 'translate-x-4'
-        : 'translate-x-1 dark:bg-gray-500'
+        : 'translate-x-1'
         )}
       />
     </HeadlessSwitch>
