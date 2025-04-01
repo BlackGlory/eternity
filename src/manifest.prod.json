@@ -1,6 +1,6 @@
 {
   "name": "Eternity"
-, "version": "0.2.0"
+, "version": "0.2.1"
 , "manifest_version": 3
 , "minimum_chrome_version": "120"
 , "description": "A minimalist JavaScript user script loader and manager for modern browsers."
