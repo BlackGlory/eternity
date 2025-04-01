@@ -1,25 +1,21 @@
-import classNames from 'classnames'
+import { twc } from '@utils/twc.js'
 
-export function IconButton(props: React.ComponentPropsWithoutRef<'button'>) {
-  return (
-    <button
-      {...props}
-      className={
-        classNames(
-          'border w-6 h-6 inline-flex justify-center items-center'
+export const IconButton = twc.button`
+  border w-6 h-6 inline-flex justify-center items-center
 
-          // Light
-        , 'hover:bg-gray-300 disabled:bg-gray-300'
-        , 'text-gray-700 disabled:text-white hover:text-gray-900'
+  cursor-pointer
+  disabled:cursor-default
 
-          // Dark
-        , 'dark:hover:bg-gray-700 dark:disabled:bg-gray-800'
-        , 'dark:text-white dark:disabled:text-gray-400 dark:hover:text-gray-200'
-        , 'dark:border-gray-600'
+  border-gray-200
+  dark:border-gray-600
 
-        , props.className
-        )
-      }
-    />
-  )
-}
+  bg-white
+  hover:bg-gray-300 hover:dark:bg-gray-700
+  disabled:bg-gray-300 disabled:dark:bg-gray-800
+
+  text-gray-700
+  dark:text-gray-400
+  hover:text-gray-900
+  disabled:text-white
+  disabled:dark:text-gray-400
+`

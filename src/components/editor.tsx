@@ -4,7 +4,6 @@ import { IBackgroundAPI, IUserScript } from '@src/contract.js'
 import { useMountAsync } from 'extra-react-hooks'
 import { Button } from '@components/button.jsx'
 import { Switch } from '@components/switch.jsx'
-import { Helmet } from 'react-helmet-async'
 import { MonacoEditor } from '@components/monaco-editor.jsx'
 import { RemoveButton } from '@components/remove-button.jsx'
 import { UpdateButton } from '@components/update-button.jsx'
@@ -64,11 +63,15 @@ export function Editor({ id, referrer }: IEditorProps) {
         }
       }}
     >
-      <Helmet>
-        <title>{userScript.name}</title>
-      </Helmet>
+      <title>{userScript.name}</title>
 
-      <header className='flex items-center gap-2 p-2 border-b dark:border-gray-800'>
+      <header className={`
+        flex items-center gap-2 p-2
+
+        border-b
+        border-gray-200
+        dark:border-gray-800
+      `}>
         <img
           className='w-6 h-6'
           src='assets/images/icon-128.png'
@@ -112,7 +115,13 @@ export function Editor({ id, referrer }: IEditorProps) {
         onChange={value => setUnsave(userScript.code !== value)}
       />
 
-      <footer className='flex justify-end gap-2 p-2 border-t dark:border-gray-800'>
+      <footer className={`
+        flex justify-end gap-2 p-2
+
+        border-t
+        border-gray-200
+        dark:border-gray-800
+      `}>
         <Button onClick={async () => {
           const editor = editorRef.current
 

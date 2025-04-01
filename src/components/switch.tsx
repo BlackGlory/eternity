@@ -1,5 +1,5 @@
 import { Switch as HeadlessSwitch } from '@headlessui/react'
-import classNames from 'classnames'
+import { twMerge } from 'tailwind-merge'
 
 interface ISwitchProps {
   value: boolean
@@ -9,18 +9,27 @@ interface ISwitchProps {
 export function Switch({ value, onChange }: ISwitchProps) {
   return (
     <HeadlessSwitch
-      title={value ? 'Disable' : 'Enable'}
+      title={
+        value
+      ? 'Disable'
+      : 'Enable'
+      }
       checked={value}
       onChange={onChange}
-      className={classNames(
+      className={twMerge(
         'inline-flex h-4 w-7 rounded-full items-center'
-      , value ? 'bg-gray-700' : 'bg-gray-300 dark:bg-gray-700'
+      , 'cursor-pointer disabled:cursor-default'
+      , value
+      ? 'bg-gray-700'
+      : 'bg-gray-300 dark:bg-gray-700'
       )}
     >
       <span
-        className={classNames(
+        className={twMerge(
           'inline-block h-2 w-2 rounded-full transform bg-white transition'
-        , value ? 'translate-x-4' : 'translate-x-1 dark:bg-gray-500'
+        , value
+        ? 'translate-x-4'
+        : 'translate-x-1 dark:bg-gray-500'
         )}
       />
     </HeadlessSwitch>
