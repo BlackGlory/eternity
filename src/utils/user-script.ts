@@ -25,6 +25,7 @@ export async function registerUserScript(
   id: string
 , matches: string[]
 , code: string
+, world?: chrome.userScripts.ExecutionWorld
 ): Promise<void> {
   await unregisterUserScript(id)
 
@@ -33,6 +34,8 @@ export async function registerUserScript(
   , matches
   , js: [{ code: esm(code) }]
   , runAt: 'document_start'
+  , allFrames: true
+  , world: world ?? undefined
   }])
 }
 

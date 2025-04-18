@@ -6,6 +6,8 @@ export interface IUserScript {
   name: string
   matches: string[]
   updateURLs: string[]
+
+  world?: chrome.userScripts.ExecutionWorld
 }
 
 export interface IUserScriptListItem {

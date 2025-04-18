@@ -4,35 +4,79 @@ import { toArray } from '@blackglory/prelude'
 import { parseMetadata, parseMetadataLines } from '@utils/metadata.js'
 
 describe('parseMetadata', () => {
-  test('with valid name', () => {
-    const code = dedent`
-    // @name Hello World
-    // @match <all_urls>
-    // @update-url http://example.com
-    `
+  describe('@name', () => {
+    test('valid', () => {
+      const code = dedent`
+      // @name Hello World
+      `
 
-    const result = parseMetadata(code)
+      const result = parseMetadata(code)
 
-    expect(result).toEqual({
-      name: 'Hello World'
-    , matches: ['<all_urls>']
-    , updateURLs: ['http://example.com']
+      expect(result).toMatchObject({
+        name: 'Hello World'
+      })
+    })
+
+    test('invalid', () => {
+      const code = dedent`
+      // @name  
+      `
+
+      const result = parseMetadata(code)
+
+      expect(result).toMatchObject({
+        name: null
+      })
     })
   })
 
-  test('without valid name', () => {
+  test('@match', () => {
     const code = dedent`
-    // @name  
     // @match <all_urls>
+    `
+
+    const result = parseMetadata(code)
+
+    expect(result).toMatchObject({
+      matches: ['<all_urls>']
+    })
+  })
+
+  test('@update-url', () => {
+    const code = dedent`
     // @update-url http://example.com
     `
 
     const result = parseMetadata(code)
 
-    expect(result).toEqual({
-      name: null
-    , matches: ['<all_urls>']
-    , updateURLs: ['http://example.com']
+    expect(result).toMatchObject({
+      updateURLs: ['http://example.com']
+    })
+  })
+
+  describe('@world', () => {
+    test('valid', () => {
+      const code = dedent`
+      // @world MAIN
+      `
+
+      const result = parseMetadata(code)
+
+      expect(result).toMatchObject({
+        world: 'MAIN'
+      })
+    })
+
+    test('invalid', () => {
+      const code = dedent`
+      // @world main
+      `
+
+      const result = parseMetadata(code)
+
+      expect(result).toMatchObject({
+        world: null
+      })
     })
   })
 })
@@ -49,7 +93,7 @@ test('parseMetadataLines', () => {
   const iter = parseMetadataLines(code)
   const result = toArray(iter)
 
-  expect(result).toEqual([
+  expect(result).toStrictEqual([
     { key: 'key1', value: 'foo bar' }
   , { key: 'key3', value: 'baz' }
   ])

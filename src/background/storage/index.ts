@@ -73,6 +73,8 @@ function convertUserScriptObjectToUserScript(obj: IUserScriptObjectV2): IUserScr
   , name: metadata.name ?? 'Unamed'
   , matches: metadata.matches
   , updateURLs: metadata.updateURLs
+  , world: metadata.world ?? undefined
+
   , code: obj.code
   }
 }

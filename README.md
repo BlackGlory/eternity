@@ -24,6 +24,7 @@ When you want to load normal JavaScript scripts as user scripts, and
 ```js
 // @name Hello World
 // @match <all_urls>
+// @world MAIN
 import { addStyleSheet } from 'https://esm.sh/userstyle@0.2.1'
 
 addStyleSheet(`
@@ -55,7 +56,13 @@ You can specify multiple patterns via multiple `@match`.
 
 ### @update-url
 The update URL of the user script.
-It is optional, Eternity accesses the URL to keep the user script up to date.
+This is optional, Eternity accesses the URL to keep the user script up to date.
 
 You can specify multiple update URLs via multiple `@update-url`.
 Eternity will check them one by one in order until a usable user script is found.
+
+### @world
+[The JavaScript world] for a user script to execute within.
+This is optional, the default value is the same as the extension API.
+
+[The JavaScript world]: https://developer.chrome.com/docs/extensions/reference/api/userScripts#type-ExecutionWorld

@@ -34,7 +34,12 @@ const api: ImplementationOf<IBackgroundAPI> = {
     if (enabled) {
       const userScript = await dao.getUserScript(id)
       if (userScript) {
-        await registerUserScript(userScript.id, userScript.matches, userScript.code)
+        await registerUserScript(
+          userScript.id
+        , userScript.matches
+        , userScript.code
+        , userScript.world
+        )
       }
     } else {
       await unregisterUserScript(id)
@@ -57,7 +62,12 @@ const api: ImplementationOf<IBackgroundAPI> = {
 
     const userScript = await dao.getUserScript(id)
     if (userScript?.enabled) {
-      await registerUserScript(userScript.id, userScript.matches, userScript.code)
+      await registerUserScript(
+        userScript.id
+      , userScript.matches
+      , userScript.code
+      , userScript.world
+      )
     }
 
     return null
