@@ -134,7 +134,12 @@ waitForLaunch().then(async details => {
   const enabledScripts = await dao.getAllEnabledUserScripts()
   await each(enabledScripts, async userScript => {
     try {
-      await registerUserScript(userScript.id, userScript.matches, userScript.code)
+      await registerUserScript(
+        userScript.id
+      , userScript.matches
+      , userScript.code
+      , userScript.world
+      )
     } catch {
       pass()
     }
