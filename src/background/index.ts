@@ -29,21 +29,23 @@ const api: ImplementationOf<IBackgroundAPI> = {
   }
 , generateUserScriptId
 , async setUserScriptEnabled(id, enabled) {
-    await dao.updateUserScriptEnabled(id, enabled)
+    await dao.transaction(async () => {
+      await dao.updateUserScriptEnabled(id, enabled)
 
-    if (enabled) {
-      const userScript = await dao.getUserScript(id)
-      if (userScript) {
-        await registerUserScript(
-          userScript.id
-        , userScript.matches
-        , userScript.code
-        , userScript.world
-        )
+      if (enabled) {
+        const userScript = await dao.getUserScript(id)
+        if (userScript) {
+          await registerUserScript(
+            userScript.id
+          , userScript.matches
+          , userScript.code
+          , userScript.world
+          )
+        }
+      } else {
+        await unregisterUserScript(id)
       }
-    } else {
-      await unregisterUserScript(id)
-    }
+    })
 
     return null
   }
@@ -58,17 +60,19 @@ const api: ImplementationOf<IBackgroundAPI> = {
     return await dao.getUserScript(id)
   }
 , async setUserScript(id, code) {
-    await dao.upsertUserScript(id, code)
+    await dao.transaction(async () => {
+      await dao.upsertUserScript(id, code)
 
-    const userScript = await dao.getUserScript(id)
-    if (userScript?.enabled) {
-      await registerUserScript(
-        userScript.id
-      , userScript.matches
-      , userScript.code
-      , userScript.world
-      )
-    }
+      const userScript = await dao.getUserScript(id)
+      if (userScript?.enabled) {
+        await registerUserScript(
+          userScript.id
+        , userScript.matches
+        , userScript.code
+        , userScript.world
+        )
+      }
+    })
 
     return null
   }

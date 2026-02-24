@@ -1,6 +1,7 @@
 import { parseMetadata } from '@utils/metadata.js'
 import { IUserScript } from '@src/contract.js'
 import { Database, IUserScriptObjectV2 } from './database.js'
+import { Awaitable } from '@blackglory/prelude'
 
 enum Boolean {
   True = 1
@@ -9,6 +10,14 @@ enum Boolean {
 
 export class DAO {
   private db = new Database()
+
+  async transaction<T>(fn: () => Awaitable<T>): Promise<T> {
+    return await this.db.transaction(
+      'rw'
+    , [this.db.userScripts]
+    , () => fn()
+    )
+  }
 
   async getAllUserScripts(): Promise<IUserScript[]> {
     const objects = await this.db.userScripts.toArray()
