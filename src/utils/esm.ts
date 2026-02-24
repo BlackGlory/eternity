@@ -7,8 +7,11 @@ export function esm(code: string): string {
     async function loadESMScript(script) {
       const blob = new Blob([script], { type: 'application/javascript' })
       const url = URL.createObjectURL(blob)
-      await import(url)
-      URL.revokeObjectURL(url)
+      try {
+        await import(url)
+      } finally {
+        URL.revokeObjectURL(url)
+      }
     }
   `
 }
