@@ -156,6 +156,18 @@
     iterable-operator "^5.0.0"
     justypes "^4.2.1"
 
+"@blackglory/structures@^0.14.12":
+  version "0.14.12"
+  resolved "https://registry.yarnpkg.com/@blackglory/structures/-/structures-0.14.12.tgz#77b715449d32e1171ba03e965b801680013dcef5"
+  integrity sha512-E5XYyF39ah5P3ZU0tK6fuJndzsPan0YdbiqbIcFnJjcmfVvz/sxNLvfFxWDDaIgtDBrS9cWIaLOXqYYTpEnGUw==
+  dependencies:
+    "@blackglory/errors" "^3.0.3"
+    "@blackglory/go" "^2.0.0"
+    extra-timers "^0.2.6"
+    extra-utils "^5.6.0"
+    iterable-operator "^5.0.0"
+    justypes "^4.2.1"
+
 "@blackglory/types@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@blackglory/types/-/types-1.4.0.tgz#412c1fc0de7c5f3ecbdd6984c15eb80c8cee393a"
@@ -2351,6 +2363,27 @@ extra-promise@^7.0.0:
     "@blackglory/go" "^2.0.0"
     "@blackglory/pass" "^1.1.1"
     "@blackglory/structures" "^0.14.9"
+    extra-abort "^0.3.9"
+    extra-fsm "^0.2.1"
+    extra-generator "^0.5.9"
+    extra-json-stable-stringify "^0.1.2"
+    extra-timers "^0.2.6"
+    extra-utils "^5.16.0"
+    hotypes "^0.6.4"
+    iterable-operator "^5.1.0"
+    justypes "^4.3.0"
+    lodash-es "^4.17.21"
+    return-style "^3.0.1"
+
+extra-promise@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/extra-promise/-/extra-promise-7.1.0.tgz#b2aa58ad4c3b8b18189f43fa32e843481a279965"
+  integrity sha512-GOERudSojMs8ELahe9SkUd5/V3UfyKtMju9QlVQy/qurtWpO8LNcThCVa3byFjYOsV44+X3DC83AeZBZDvvLaw==
+  dependencies:
+    "@blackglory/errors" "^3.0.3"
+    "@blackglory/go" "^2.0.0"
+    "@blackglory/pass" "^1.1.1"
+    "@blackglory/structures" "^0.14.12"
     extra-abort "^0.3.9"
     extra-fsm "^0.2.1"
     extra-generator "^0.5.9"

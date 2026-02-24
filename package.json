@@ -67,7 +67,7 @@
     "delight-rpc": "^6.1.2",
     "dexie": "^4.0.11",
     "extra-fetch": "^4.0.7",
-    "extra-promise": "^7.0.0",
+    "extra-promise": "^7.1.0",
     "extra-proxy": "^0.4.1",
     "extra-react-hooks": "^0.8.3",
     "extra-react-store": "^0.2.0",
