@@ -11,6 +11,9 @@ enum Boolean {
 export class DAO {
   private db = new Database()
 
+  /**
+   * @param fn Dexie要求事务中不能有Dexie以外的异步等待.
+   */
   async transaction<T>(fn: () => Awaitable<T>): Promise<T> {
     return await this.db.transaction(
       'rw'
