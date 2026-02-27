@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { createBackgroundClient } from '@delight-rpc/webextension'
 import { IBackgroundAPI, IUserScript } from '@src/contract.js'
-import { useMountAsync } from 'extra-react-hooks'
+import { useMountAsync, useUnmount } from 'extra-react-hooks'
 import { Button } from '@components/button.jsx'
 import { Switch } from '@components/switch.jsx'
 import { MonacoEditor } from '@components/monaco-editor.jsx'
@@ -17,7 +17,9 @@ export interface IEditorProps {
 }
 
 export function Editor({ id, referrer }: IEditorProps) {
-  const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
+  const [client, closeClient] = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
+  useUnmount(closeClient)
+
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>(null)
   const [userScript, updateUserScript] = useImmer<IUserScript>({
     id

@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { Button } from '@components/button.jsx'
 import { createBackgroundClient } from '@delight-rpc/webextension'
 import { IBackgroundAPI, IUserScript, IUserScriptListItem } from '@src/contract.js'
-import { useMountAsync } from 'extra-react-hooks'
+import { useMountAsync, useUnmount } from 'extra-react-hooks'
 import { each } from 'extra-promise'
 import { isntEmptyArray } from '@blackglory/prelude'
 import { ClientProxy } from 'delight-rpc'
@@ -15,7 +15,9 @@ import { appendSearchParam } from 'url-operator'
 import { getActiveTab } from 'extra-webextension'
 
 export function Options() {
-  const client = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
+  const [client, closeClient] = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
+  useUnmount(closeClient)
+
   const userScripts = useSelector(OptionsStoreContext, state => state.userScripts)
   const nameFilter = useSelector(OptionsStoreContext, state => state.nameFilter)
   const updateState = useUpdater(OptionsStoreContext)
