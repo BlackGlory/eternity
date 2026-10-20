@@ -14,7 +14,7 @@ import { UpdateButton } from '@components/update-button.jsx'
 import { appendSearchParam } from 'url-operator'
 import { getActiveTab } from 'extra-webextension'
 import { twMerge } from 'tailwind-merge'
-import { matchPatterns } from '@utils/match-patterns.js'
+import { matchURLPatterns } from '@utils/match-url-patterns.js'
 
 export function Options() {
   const [client, closeClient] = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
@@ -83,7 +83,7 @@ export function Options() {
                                     .includes(nameFilter.toLowerCase()))
             .map(userScript => {
               const urlPatternMatched = activeTabURL
-                                      ? matchPatterns(userScript.matches, activeTabURL)
+                                      ? matchURLPatterns(userScript.matches, activeTabURL)
                                       : false
 
               return {
