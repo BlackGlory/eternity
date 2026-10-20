@@ -4,7 +4,7 @@ import { createBackgroundClient } from '@delight-rpc/webextension'
 import { IBackgroundAPI, IUserScript, IUserScriptListItem } from '@src/contract.js'
 import { useMountAsync, useUnmount } from 'extra-react-hooks'
 import { each } from 'extra-promise'
-import { isntEmptyArray } from '@blackglory/prelude'
+import { go, isntEmptyArray } from '@blackglory/prelude'
 import { ClientProxy } from 'delight-rpc'
 import { useSelector, useUpdater } from 'extra-react-store'
 import { OptionsStoreContext } from '@utils/options-store.js'
@@ -13,6 +13,8 @@ import { RemoveButton } from '@components/remove-button.jsx'
 import { UpdateButton } from '@components/update-button.jsx'
 import { appendSearchParam } from 'url-operator'
 import { getActiveTab } from 'extra-webextension'
+import { twMerge } from 'tailwind-merge'
+import { matchPatterns } from '@utils/match-patterns.js'
 
 export function Options() {
   const [client, closeClient] = useMemo(() => createBackgroundClient<IBackgroundAPI>(), [])
@@ -20,9 +22,11 @@ export function Options() {
 
   const userScripts = useSelector(OptionsStoreContext, state => state.userScripts)
   const nameFilter = useSelector(OptionsStoreContext, state => state.nameFilter)
+  const activeTabURL = useSelector(OptionsStoreContext, state => state.activeTabURL)
   const updateState = useUpdater(OptionsStoreContext)
 
   useMountAsync(loadUserScriptList)
+  useMountAsync(loadActiveTabURL)
 
   return (
     <div className='flex flex-col min-w-[300px] min-h-[400px] max-h-screen overflow-y-hidden'>
@@ -36,9 +40,8 @@ export function Options() {
       `}>
         <Button onClick={async () => {
           const id = await client.generateUserScriptId()
-          const activeTab = await getActiveTab()
 
-          await chrome.tabs.create({ url: getEditorURL(id, activeTab.url) })
+          await chrome.tabs.create({ url: getEditorURL(id, activeTabURL ?? undefined) })
         }}>New Script</Button>
 
         <Button onClick={async () => {
@@ -71,22 +74,43 @@ export function Options() {
       />
 
       <ul className='flex-1 overflow-y-auto'>
-        {
-          userScripts
-            .filter(userScript => userScript.name.toLowerCase().includes(nameFilter.toLowerCase()))
-            .map(userScript => (
-              <li
-                key={userScript.id}
-                className={`
+        {go(() => {
+          const items: Array<{
+            userScript: IUserScriptListItem
+            matched: boolean
+          }> = userScripts
+            .filter(userScript => userScript.name.toLowerCase()
+                                    .includes(nameFilter.toLowerCase()))
+            .map(userScript => {
+              const urlPatternMatched = activeTabURL
+                                      ? matchPatterns(activeTabURL, userScript.matches)
+                                      : false
+
+              return {
+                userScript
+              , matched: urlPatternMatched
+              }
+            })
+
+          return [
+            ...items.filter(item => item.matched)
+          , ...items.filter(item => !item.matched)
+          ].map(({ userScript, matched }) => (
+            <li
+              key={userScript.id}
+              className={twMerge(
+                `
                   border-b
                   border-gray-200
                   hover:bg-gray-100
-                `}
-              >
-                <UserScriptListItem client={client} userScript={userScript} />
-              </li>
-            ))
-        }
+                `
+              , matched && 'bg-gray-100'
+              )}
+            >
+              <UserScriptListItem client={client} userScript={userScript} />
+            </li>
+          ))
+        })}
       </ul>
     </div>
   )
@@ -96,6 +120,15 @@ export function Options() {
 
     updateState(state => {
       state.userScripts = userScripts
+    })
+  }
+
+  async function loadActiveTabURL(signal?: AbortSignal): Promise<void> {
+    const activeTab = await getActiveTab()
+    signal?.throwIfAborted()
+
+    updateState(state => {
+      state.activeTabURL = activeTab.url ?? null
     })
   }
 }

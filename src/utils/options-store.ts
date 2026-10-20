@@ -4,6 +4,7 @@ import { Store, createStoreContext } from 'extra-react-store'
 interface IState {
   userScripts: IUserScriptListItem[]
   nameFilter: string
+  activeTabURL: string | null
 }
 
 export class OptionsStore extends Store<IState> {
@@ -11,6 +12,7 @@ export class OptionsStore extends Store<IState> {
     super({
       userScripts: []
     , nameFilter: ''
+    , activeTabURL: null
     })
   }
 }
