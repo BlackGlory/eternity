@@ -64,7 +64,7 @@
     "@delight-rpc/webextension": "^0.4.2",
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
-    "@webext-core/match-patterns": "^2.0.0",
+    "browser-extension-url-match": "^1.2.0",
     "delight-rpc": "^7.0.1",
     "dexie": "^4.3.0",
     "extra-fetch": "^5.2.0",

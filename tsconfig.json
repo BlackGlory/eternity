@@ -13,11 +13,11 @@
   , "noUnusedParameters": false
   , "baseUrl": "."
   , "paths": {
-      "@src/*": ["src/*"]
-    , "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"]
     , "@background/*": ["src/background/*"]
     , "@hooks/*": ["src/hooks/*"]
     , "@utils/*": ["src/utils/*"]
+    , "@src/*": ["src/*"]
     , "@test/*": ["__tests__/*"]
     }
   , "plugins": [

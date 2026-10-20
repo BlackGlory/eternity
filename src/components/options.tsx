@@ -83,7 +83,7 @@ export function Options() {
                                     .includes(nameFilter.toLowerCase()))
             .map(userScript => {
               const urlPatternMatched = activeTabURL
-                                      ? matchPatterns(activeTabURL, userScript.matches)
+                                      ? matchPatterns(userScript.matches, activeTabURL)
                                       : false
 
               return {
