@@ -31,4 +31,22 @@ describe('matchURLPatterns', () => {
       expect(matchURLPatterns(patterns, 'https://example.com/pathname?bar=foo')).toBe(false)
     })
   })
+
+  test('any of patterns', () => {
+    const patterns = [
+      'https://foo.example.com/'
+    , 'https://*/foo'
+    ]
+
+    expect(matchURLPatterns(patterns, 'https://foo.example.com/')).toBe(true)
+    expect(matchURLPatterns(patterns, 'https://foo.example.com/foo')).toBe(true)
+    expect(matchURLPatterns(patterns, 'https://bar.example.com/foo')).toBe(true)
+    expect(matchURLPatterns(patterns, 'https://bar.example.com/')).toBe(false)
+  })
+
+  test('invalid pattern', () => {
+    const patterns = ['https://*.example.com']
+
+    expect(matchURLPatterns(patterns, 'https://foo.example.com/')).toBe(false)
+  })
 })
